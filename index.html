@@ -1,23 +1,104 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #393939;
-    }
-    h1 {
-      text-align: center;
-      font-size: 70px;
-      color: #ffaa23;
-    }
-  </style>
-</head>
-<body>
-  <h1>Team 6: Excellence</h1>
-</body>
-</html>
 
+  <head>
+    <title>Team 6 Contacts</title>
+    <style>
+      .contacts-header {
+        margin-top: 25px;
+        font-size: 56px;
+        text-align: center;
+
+      }
+      .login-page {
+        display: grid;
+        grid-template-columns: 1fr 400px 1fr;
+        margin-top: 100px
+      }
+      .login-box {
+        background-color: lightgrey;
+        padding: 10px;
+      }
+      .login-header {
+        font-size: 36px;
+        text-align: center;
+        display: block;
+      }
+      .login-result {
+        margin-top: 5px;
+        margin-bottom: 0px;
+        color: red;
+      }
+      .above-field-text {
+        font-size: 22px;
+        margin-bottom: 2px;
+        margin-top: 7px;
+      }
+      .input-field {
+        display: block;
+      }
+      .login-button {
+        margin-top: 10px;
+      }
+      
+
+    </style>
+  </head>
+
+  <body>
+    <div class="contacts-header">
+      TEAM 6 CONTACTS
+    </div>
+    <div class="login-page">
+      <div></div> <!-- empty div for left side -->
+      <div class="login-box">
+        <h class="login-header"> Login </h>
+        <p class="login-result" id="loginResult"></p>
+          <h1 class="above-field-text"> Username </h1>
+            <input class="input-field" type="text" placeholder="Enter Username" id="username">
+          <h1 class="above-field-text"> Password </h1>
+            <input class="input-field" type="password" placeholder="Enter Password" id="password">
+        <button class="login-button" type="submit" onclick="doLogin();"> Login </button>
+      </div>
+      <div></div> <!-- empty div for right side -->
+    </div>
+    <script>
+      const LOGIN_ENDPOINT="http://167.99.3.65/LAMPAPI/Login.php";
+      function doLogin() {
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+        let request = {
+          "login": username,
+          "password": password
+        };
+        console.log(request);
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", LOGIN_ENDPOINT, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+          xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              let response = JSON.parse(xhr.responseText);
+              console.log(response);
+              if (response["id"] < 1) {
+                document.getElementById("loginResult").innerHTML = "Username and/or Password not found. Please try again.";
+                return;
+              }
+              else {
+                console.log("login success");
+                let firstName = response["firstName"];
+                let lastName = response["lastName"];
+                document.getElementById("loginResult").innerHTML = `Login succeeded. Welcome ${firstName} ${lastName}`;
+              }
+            }
+          };
+          xhr.send(JSON.stringify(request));
+        }
+        catch(err) {
+          document.getElementById("loginResult").innerHTML = err.message;
+        }
+      }
+    </script>
+  </body>
+
+</html>
