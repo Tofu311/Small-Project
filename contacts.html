@@ -5,11 +5,28 @@
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/contacts.css">
     </head>
-    <body>
+    <body onload="loadAllContacts();">
       <div id="contacts-header">
         TEAM 6 CONTACTS
       </div>
-      <p id="contacts-text">Contacts page coming soon</p>
+      <div id="contacts-page">
+        <div></div>
+        <div>
+          <h1 id="contacts-table-header">Contacts</h1>
+          <table id="contacts-table">
+            <thead>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+            </thead>
+            <tbody id="contacts-table-body">
+
+            </tbody>
+          </table>
+        </div>
+        <div></div>
+      </div>
+      
     </body>
     <script src="js/code.js"></script>
 </html>

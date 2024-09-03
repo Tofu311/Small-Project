@@ -92,12 +92,58 @@ function doSignup() {
     }
 }
 
-function getAllContacts() {
-    const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
+function getAllContactsMOCK() {
+    return [
+            {
+                "Name": "Arup Updated",
+                "Phone": "123-456-7890",
+                "Email": "TBrady12@ucf.edu"
+            },
+            {
+                "Name": "Tanvir",
+                "Phone": "407-823-5043",
+                "Email": "Tanvir.Ahmed@ucf.edu"
+            },
+            {
+                "Name": "Andrew",
+                "Phone": "407-823-2844",
+                "Email": "Andrew.Steinberg@ucf.edu"
+            },
+            {
+                "Name": "Paul",
+                "Phone": "407-823-5239",
+                "Email": "Paul.Gazzillo@ucf.edu"
+            },
+            {
+                "Name": "Chris Coopa",
+                "Phone": "386-299-0300",
+                "Email": "dasDofen@ucf.edu"
+            }
+        ]
+}
 
+function loadAllContacts() {
+    const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
     let request = {
         "Name": "",
         "Phone": "",
         "Email": ""
+    }
+    console.log(request);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", SEARCH_ENDPOINT, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                contacts = response["results"];
+                contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += `<tr><td>${contact["Name"]}</td><td>${contact["Phone"]}</td><td>${contact["Email"]}</td></tr>`);
+            }
+        };
+        xhr.send(JSON.stringify(request));
+    }
+    catch (err) {
+        console.log(err.message);
     }
 }
