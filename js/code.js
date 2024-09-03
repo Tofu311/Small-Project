@@ -7,15 +7,18 @@ function switchToSignup() {
     window.location.href = "signup.html";
 }
 
-function showPassword() {
-    let password_input = document.getElementById("password");
-    if (password_input.type === "password") {
+// Show/Hide password functionality
+let show_button = document.getElementById("show-password-button");
+let password_input = document.getElementById("password");
+show_button.addEventListener("click", function() {
+    if(password_input.type === "password") {
         password_input.type = "text";
-    }
-    else {
+        show_button.innerHTML = "Hide password";
+    } else {
         password_input.type = "password";
+        show_button.innerHTML = "Show password";
     }
-}
+});
 
 function doLogin() {
     const LOGIN_ENDPOINT = API_URL + "/Login.php";
