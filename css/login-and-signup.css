@@ -1,0 +1,66 @@
+#login-or-signup-page {
+    display: grid;
+    grid-template-columns: 1fr 400px 1fr;
+    margin-top: 100px
+}
+
+#login-or-signup-box {
+    background-color: lightgrey;
+    padding: 10px;
+}
+
+#login-or-signup-header {
+    font-size: 36px;
+    text-align: center;
+    display: block;
+}
+
+#login-or-signup-result {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: red;
+}
+
+.above-field-text {
+    font-size: 22px;
+    margin-bottom: 2px;
+    margin-top: 7px;
+}
+
+.input-field {
+    padding: 3px;
+}
+
+#login-or-signup-button {
+    margin-top: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: block;
+    cursor: pointer;
+}
+
+#switch-login-or-signup {
+    text-align: center;
+    font-size: 16px;
+}
+
+#switch-login-or-signup-button {
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    display: inline-block;
+    background: none;
+    border: none;
+    color: blue;
+}
+
+#switch-login-or-signup-text {
+    display: inline-block;
+}
+
+#show-password-button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
