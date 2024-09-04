@@ -24,42 +24,6 @@ try {
     console.log(err);
 }
 
-// Contact Table Sorting functionality
-function sortTable(columnIndex) {
-    let table = document.getElementById("contacts-table");
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody > tr"));
-
-    rows.sort((rowA, rowB) => {
-        cellA = rowA.cells[columnIndex].textContent;
-        cellB = rowB.cells[columnIndex].textContent;
-
-        //  Numerical comparison
-        if(!isNaN(cellA) && !isNaN(cellB)) {
-            return cellA - cellB;
-        }
-
-        // String comparison
-        return cellA.localeCompare(cellB);
-    });
-
-    rows.forEach((row)=> {
-        table.querySelector("tbody").appendChild(row);
-    });
-}
-
-// Add event listeners to table headers
-document.getElementById("nameSort").addEventListener("click", () => {
-    sortTable(0);
-});
-
-document.getElementById("phoneSort").addEventListener("click", () => {
-    sortTable(1);
-});
-
-document.getElementById("emailSort").addEventListener("click", () => {
-    sortTable(2);
-});
-
 function doLogin() {
     const LOGIN_ENDPOINT = API_URL + "/Login.php";
     let username = document.getElementById('username').value;
