@@ -36,9 +36,9 @@ function sortTable(columnIndex) {
                 // Alphabetical sorting
                 if (sortDirections[columnIndex]) {
                     headerButton.classList.add("fa-arrow-up-a-z");
-                    headerButton.classList.remove("fa-arrow-down-a-z");
+                    headerButton.classList.remove("fa-arrow-down-z-a");
                 } else {
-                    headerButton.classList.add("fa-arrow-down-a-z");
+                    headerButton.classList.add("fa-arrow-down-z-a");
                     headerButton.classList.remove("fa-arrow-up-a-z");
                 }
             } else {
