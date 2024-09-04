@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Team 6 Contacts DEV</title>
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/contacts.css">
     </head>
-    <body onload="loadAllContacts();">
+    <body>
       <div id="contacts-header">
         TEAM 6 CONTACTS
       </div>
@@ -15,12 +17,29 @@
           <h1 id="contacts-table-header">Contacts</h1>
           <table id="contacts-table">
             <thead>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
+              <tr>
+                <th id="nameHeader">Name</th>
+                <th id="phoneHeader">Phone</th>
+                <th id="emailHeader">Email</th>
+              </tr>
             </thead>
             <tbody id="contacts-table-body">
-
+              <!--HARDCODED DATA ONLY FOR DEV PURPOSES-->
+              <tr>
+                <td>Arup Updated</td>
+                <td>123-456-7890</td>
+                <td>TBrady12@ucf.edu</td>
+              </tr>
+              <tr>
+                <td>Tanvir</td>
+                <td>407-823-5043</td>
+                <td>Tanvir.Ahmded@ucf.edu</td>
+              </tr>
+              <tr>
+                <td>Chris Coopa</td>
+                <td>386-299-0300</td>
+                <td>dasDofen@ucf.edu</td>
+              </tr>
             </tbody>
           </table>
         </div>

@@ -23,6 +23,7 @@
 th {
     background-color: #04AA6D;
     color: white;
+    cursor: pointer;
     height: 30px;
 }
 td {

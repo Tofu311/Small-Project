@@ -10,14 +10,54 @@ function switchToSignup() {
 // Show/Hide password functionality
 let show_button = document.getElementById("show-password-button");
 let password_input = document.getElementById("password");
-show_button.addEventListener("click", function() {
-    if(password_input.type === "password") {
-        password_input.type = "text";
-        show_button.innerHTML = "Hide password";
-    } else {
-        password_input.type = "password";
-        show_button.innerHTML = "Show password";
-    }
+try {
+    show_button.addEventListener("click", function() {
+        if(password_input.type === "password") {
+            password_input.type = "text";
+            show_button.innerHTML = "Hide password";
+        } else {
+            password_input.type = "password";
+            show_button.innerHTML = "Show password";
+        }
+    });
+} catch (err) {
+    console.log(err);
+}
+
+// Contact Table Sorting functionality
+function sortTable(columnIndex) {
+    let table = document.getElementById("contacts-table");
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody > tr"));
+
+    rows.sort((rowA, rowB) => {
+        cellA = rowA.cells[columnIndex].textContent;
+        cellB = rowB.cells[columnIndex].textContent;
+
+        //  Numerical comparison
+        if(!isNaN(cellA) && !isNaN(cellB)) {
+            return cellA - cellB;
+        }
+
+        // String comparison
+        return cellA.localeCompare(cellB);
+    });
+
+    rows.forEach((row)=> {
+        table.querySelector("tbody").appendChild(row);
+    });
+}
+
+// Add event listeners to table headers
+document.getElementById("nameHeader").addEventListener("click", () => {
+    sortTable(0);
+});
+
+document.getElementById("phoneHeader").addEventListener("click", () => {
+    sortTable(1);
+});
+
+document.getElementById("emailHeader").addEventListener("click", () => {
+    sortTable(2);
 });
 
 function doLogin() {
