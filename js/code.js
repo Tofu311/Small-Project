@@ -48,15 +48,15 @@ function sortTable(columnIndex) {
 }
 
 // Add event listeners to table headers
-document.getElementById("nameHeader").addEventListener("click", () => {
+document.getElementById("nameSort").addEventListener("click", () => {
     sortTable(0);
 });
 
-document.getElementById("phoneHeader").addEventListener("click", () => {
+document.getElementById("phoneSort").addEventListener("click", () => {
     sortTable(1);
 });
 
-document.getElementById("emailHeader").addEventListener("click", () => {
+document.getElementById("emailSort").addEventListener("click", () => {
     sortTable(2);
 });
 

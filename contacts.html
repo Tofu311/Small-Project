@@ -6,6 +6,7 @@
         <title>Team 6 Contacts DEV</title>
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/contacts.css">
+        <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
     </head>
     <body>
       <div id="contacts-header">
@@ -18,9 +19,42 @@
           <table id="contacts-table">
             <thead>
               <tr>
-                <th id="nameHeader">Name</th>
-                <th id="phoneHeader">Phone</th>
-                <th id="emailHeader">Email</th>
+                <div class="table-header-container">
+                  <th>
+                    <div class="table-header-field">
+                      Name
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="nameSort">
+                        <i class="fa-solid fa-arrow-up-a-z"></i>
+                      </button>
+                    </div>
+                  </th>
+                </div>
+                <div class="table-header-container">
+                  <th>
+                    <div class="table-header-field">
+                      Phone
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="phoneSort">
+                        <i class="fa-solid fa-arrow-up-1-9"></i>
+                      </button>
+                    </div>
+                  </th>
+                </div>
+                <div class="table-header-container">
+                  <th>
+                    <div class="table-header-field">
+                      Email
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="emailSort">
+                        <i class="fa-solid fa-arrow-up-a-z"></i>
+                      </button>
+                    </div>
+                  </th>
+                </div>
               </tr>
             </thead>
             <tbody id="contacts-table-body">
