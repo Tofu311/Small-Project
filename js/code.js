@@ -10,15 +10,19 @@ function switchToSignup() {
 // Show/Hide password functionality
 let show_button = document.getElementById("show-password-button");
 let password_input = document.getElementById("password");
-show_button.addEventListener("click", function() {
-    if(password_input.type === "password") {
-        password_input.type = "text";
-        show_button.innerHTML = "Hide password";
-    } else {
-        password_input.type = "password";
-        show_button.innerHTML = "Show password";
-    }
-});
+try {
+    show_button.addEventListener("click", function() {
+        if(password_input.type === "password") {
+            password_input.type = "text";
+            show_button.innerHTML = "Hide password";
+        } else {
+            password_input.type = "password";
+            show_button.innerHTML = "Show password";
+        }
+    });
+} catch (err) {
+    console.log(err);
+}
 
 function doLogin() {
     const LOGIN_ENDPOINT = API_URL + "/Login.php";
@@ -123,30 +127,4 @@ function getAllContactsMOCK() {
                 "Email": "dasDofen@ucf.edu"
             }
         ]
-}
-
-function loadAllContacts() {
-    const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
-    let request = {
-        "Name": "",
-        "Phone": "",
-        "Email": ""
-    }
-    console.log(request);
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", SEARCH_ENDPOINT, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    try {
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                let response = JSON.parse(xhr.responseText);
-                contacts = response["results"];
-                contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += `<tr><td>${contact["Name"]}</td><td>${contact["Phone"]}</td><td>${contact["Email"]}</td></tr>`);
-            }
-        };
-        xhr.send(JSON.stringify(request));
-    }
-    catch (err) {
-        console.log(err.message);
-    }
 }

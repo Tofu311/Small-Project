@@ -30,3 +30,21 @@ td {
 }
 tr:nth-child(even) {background-color: #f2f2f2;}
 tr:hover{background-color: lightgrey;}
+
+.table-header-container {
+    overflow: auto;
+}
+
+.table-header-field {
+    float: left;
+}
+
+.table-header-sort-div {
+    float: right;
+}
+
+th button {
+    cursor: pointer;
+    border: 1px solid;
+    margin-right: 0;
+}

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Team 6 Contacts DEV</title>
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/contacts.css">
+        <script src="js/code.js"></script>
+        <script src="js/contact_table.js"></script>
+        <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
     </head>
-    <body onload="loadAllContacts();">
+    <body>
       <div id="contacts-header">
         TEAM 6 CONTACTS
       </div>
@@ -15,18 +20,51 @@
           <h1 id="contacts-table-header">Contacts</h1>
           <table id="contacts-table">
             <thead>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
+              <tr>
+                <div class="table-header-container">
+                  <th>
+                    <div class="table-header-field">
+                      Name
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="nameSort">
+                        <i class="fa-solid fa-arrow-up-a-z" id="name-alpha-sort"></i>
+                      </button>
+                    </div>
+                  </th>
+                </div>
+                <div class="table-header-container">
+                  <th>
+                    <div class="table-header-field">
+                      Phone
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="phoneSort">
+                        <i class="fa-solid fa-arrow-up-1-9" id="phone-number-sort"></i>
+                      </button>
+                    </div>
+                  </th>
+                </div>
+                <div class="table-header-container">
+                  <th>
+                    <div class="table-header-field">
+                      Email
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="emailSort">
+                        <i class="fa-solid fa-arrow-up-a-z" id="email-alpha-sort"></i>
+                      </button>
+                    </div>
+                  </th>
+                </div>
+              </tr>
             </thead>
             <tbody id="contacts-table-body">
-
+              
             </tbody>
           </table>
         </div>
         <div></div>
       </div>
-      
     </body>
-    <script src="js/code.js"></script>
 </html>
