@@ -1,18 +1,20 @@
-#contacts-text {
-    font-size: 50px;
-}
-#contacts-page {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    margin-top: 50px;
-}
 #contacts-table-header {
     margin-bottom: 10px;
 }
-#contacts-table, th, td {
+
+#contacts-table-box {
+    margin: auto;
+    margin-top: 50px;
+    width: 1200px;
+}
+
+#contacts-table,
+th,
+td {
     padding: 5px;
     border-bottom: 1px solid #ddd;
 }
+
 #contacts-table {
     font-family: Arial;
     width: 100%;
@@ -20,16 +22,24 @@
     outline-width: 2px;
     text-align: left;
 }
+
 th {
-    background-color: #04AA6D;
+    background-color: #505050;
     color: white;
     height: 30px;
 }
+
 td {
     height: 40px;
 }
-tr:nth-child(even) {background-color: #f2f2f2;}
-tr:hover{background-color: lightgrey;}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: lightgrey;
+}
 
 .table-header-container {
     overflow: auto;

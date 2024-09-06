@@ -98,33 +98,3 @@ function doSignup() {
         document.getElementById("login-or-signup-result").innerHTML = err.message;
     }
 }
-
-function getAllContactsMOCK() {
-    return [
-            {
-                "Name": "Arup Updated",
-                "Phone": "123-456-7890",
-                "Email": "TBrady12@ucf.edu"
-            },
-            {
-                "Name": "Tanvir",
-                "Phone": "407-823-5043",
-                "Email": "Tanvir.Ahmed@ucf.edu"
-            },
-            {
-                "Name": "Andrew",
-                "Phone": "407-823-2844",
-                "Email": "Andrew.Steinberg@ucf.edu"
-            },
-            {
-                "Name": "Paul",
-                "Phone": "407-823-5239",
-                "Email": "Paul.Gazzillo@ucf.edu"
-            },
-            {
-                "Name": "Chris Coopa",
-                "Phone": "386-299-0300",
-                "Email": "dasDofen@ucf.edu"
-            }
-        ]
-}
