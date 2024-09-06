@@ -58,3 +58,10 @@ th button {
     border: 1px solid;
     margin-right: 0;
 }
+
+#logout-button {
+    margin: 50px;
+    vertical-align: middle;
+    padding: 5px;
+    cursor: pointer;
+}

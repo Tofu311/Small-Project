@@ -5,7 +5,6 @@ function loadAllContacts() {
         "Phone": "",
         "Email": ""
     }
-    console.log(request);
     let xhr = new XMLHttpRequest();
     xhr.open("POST", SEARCH_ENDPOINT, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");

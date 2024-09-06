@@ -10,14 +10,19 @@
     <script src="js/code.js"></script>
     <script src="js/contact_table.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        readCookie();
+      }, false);
+    </script>
   </head>
 
   <body>
 
     <div id="contacts-header">
       TEAM 6 CONTACTS
+      <button id="logout-button" onclick="doLogout();">Logout</button>
     </div>
-
     <div id="contacts-table-box">
       <h1 id="contacts-table-header">Contacts</h1>
       <table id="contacts-table">
