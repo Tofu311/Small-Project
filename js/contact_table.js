@@ -1,9 +1,14 @@
 function loadAllContacts() {
     const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
+    if (userId == null) {
+        console.log("error: userId undefined");
+        return;
+    }
     let request = {
         "Name": "",
         "Phone": "",
-        "Email": ""
+        "Email": "",
+        "userID": userId
     }
     let xhr = new XMLHttpRequest();
     xhr.open("POST", SEARCH_ENDPOINT, true);
@@ -12,6 +17,10 @@ function loadAllContacts() {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
+                if (response["error"] === "No Records Found") {
+                    console.log("Found no contacts for user");
+                    return;
+                }
                 contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += `<tr><td>${contact["Name"]}</td><td>${contact["Phone"]}</td><td>${contact["Email"]}</td></tr>`);
             }
