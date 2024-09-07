@@ -7,6 +7,8 @@
     $email = $inData["email"];
     $userID = $inData["userID"];
     $contactID = $inData["contactID"];
+    $firstname = $inData["firstname"];
+    $lastname = $inData["lastname"];
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");     
     if( $conn->connect_error )
@@ -15,9 +17,15 @@
     }
     else
     {
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+           returnWithError("Invalid email format");
+           exit();
+        }
+
         // Updates contact information based on contact ID and user ID
-        $stmt = $conn->prepare("UPDATE Contacts SET Name=?, Phone=?, Email=? WHERE ID=? AND UserID=?");
-        $stmt->bind_param("sssii", $name, $phone, $email, $contactID, $userID);
+        $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ? , LastName = ? , Name = ?, Phone = ?, Email = ? WHERE ID = ? AND UserID = ?");
+        $stmt->bind_param("sssssii", $firstname , $lastname ,$name, $phone, $email, $contactID, $userID);
 
         if($stmt->execute())
         {
