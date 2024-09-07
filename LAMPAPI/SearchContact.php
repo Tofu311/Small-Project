@@ -4,6 +4,10 @@
 	
 	$searchResults = "";
 	$searchCount = 0;
+	$name = "%" . $inData["name"] . "%";
+	$phone = "%" . $inData["phone"] . "%";
+	$email = "%" . $inData["email"] . "%"; 
+	$userID = $inData["userID"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -12,9 +16,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT * from Contacts where Name like ? OR Phone like ? OR Email like ?");
-		$Name = "%" . $inData["search"] . "%";
-		$stmt->bind_param("sss", $Name, $Name, $Name);
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (Name like ? OR Phone like ? OR Email like ?) AND UserID like ?");
+	
+		$stmt->bind_param("sssi", $name, $phone, $email, $userID);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -26,8 +30,8 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			//$searchResults .= '"' . $row["Name"] . '"';
-      $searchResults .= '{"Name" : "'. $row["Name"].'", "Phone" : "'. $row["Phone"].'", "Email" : "'. $row["Email"].'"}';
+		
+      $searchResults .= '{"Name" : "'. $row["Name"].'", "Phone" : "'. $row["Phone"].'", "Email" : "'. $row["Email"].'" ,  "UserID" : "'. $row["UserID"].'",}';
 		}
 	
 		if( $searchCount == 0 )
