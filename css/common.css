@@ -3,3 +3,89 @@
     font-size: 56px;
     text-align: center;
 }
+
+links {
+    font-size: 12px;
+    float: left;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1b1b1b;
+    font-family: 'Arial', sans-serif;
+    color: #f7f7f7;
+    text-align: center;
+}
+header {
+    padding: 20px;
+    color: #ff751a;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px black;
+
+}
+.hero-section {
+    height: 100vh;
+    background: url('halloweenBackground.webp') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h1 {
+    font-size: 64px;
+    color: #f7f7f7;
+    text-shadow: 3px 3px 10px #000;
+}
+p {
+    font-size: 22px;
+    color: #ff751a;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgb(131, 131, 131);
+}
+.btn {
+    background-color: #ff6600;
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px #000;
+}
+.btn:hover {
+    background-color: #ff5200;
+}
+footer {
+    padding: 20px;
+    background-color: #282828;
+    color: #ff751a;
+}
+.footer-content {
+    margin-top: 20px;
+}
+links {
+    font-size: 12px;
+    float: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1b1b1b;
+}
+a {
+    display: block;
+    padding: 8px;
+    background-color: #1b1b1b;
+}
+links a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+links a:hover {
+    background-color:#ff751a;
+}

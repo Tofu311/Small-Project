@@ -15,65 +15,95 @@
         readCookie();
       }, false);
     </script>
+
+    <style>
+      .hero-section {
+        background-image: url('css/halloweenbg2.jpg');
+        background-repeat: no-repeat;
+      }
+      </style> 
   </head>
 
   <body>
-    <!--hello2!-->
-    <!--hello!-->
+    <links>
+      <a href="signup.html">Sign Up</a>
+      <a onclick="doLogout();">Logout</a>
+    </links>
 
-    <div id="contacts-header">
-      TEAM 6 UWU
-      <button id="logout-button" onclick="doLogout();">Logout</button>
+    <header>
+      Spooky Contacts
+
+    </header>
+
+    <div class="hero-section">
+      <div id="contacts-table-box">
+        <contact_header id="contacts-table-header">Spooky Contacts</contact_header>
+        <table id="contacts-table">
+          <thead>
+            <tr>
+              <div class="table-header-container">
+                <th>
+                  <div class="table-header-field">
+                    Name
+                  </div>
+                  <div class="table-header-sort-div">
+                    <button class="sort-button" id="nameSort">
+                      <i class="fa-solid fa-arrow-up-a-z" id="name-alpha-sort"></i>
+                    </button>
+                  </div>
+                </th>
+              </div>
+              <div class="table-header-container">
+                <th>
+                  <div class="table-header-field">
+                    Phone
+                  </div>
+                  <div class="table-header-sort-div">
+                    <button class="sort-button" id="phoneSort">
+                      <i class="fa-solid fa-arrow-up-1-9" id="phone-number-sort"></i>
+                    </button>
+                  </div>
+                </th>
+              </div>
+              <div class="table-header-container">
+                <th>
+                  <div class="table-header-field">
+                    Email
+                  </div>
+                  <div class="table-header-sort-div">
+                    <button class="sort-button" id="emailSort">
+                      <i class="fa-solid fa-arrow-up-a-z" id="email-alpha-sort"></i>
+                    </button>
+                  </div>
+                </th>
+              </div>
+
+              <div class="table-header-container"></div>
+                <th>
+                  <div class="table-header-field">
+                    
+                  </div>
+                  <div class="table-header-sort-div">
+                  </div>
+                </th>
+              </div>
+            </tr>
+          </thead>
+          <tbody id="contacts-table-body">
+            <tr>
+              <td>hi
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+        &copy; 2024 Team Six. No rights reserved.
     </div>
-    <div id="contacts-table-box">
-      <h1 id="contacts-table-header">Contacts</h1>
-      <table id="contacts-table">
-        <thead>
-          <tr>
-            <div class="table-header-container">
-              <th>
-                <div class="table-header-field">
-                  Name
-                </div>
-                <div class="table-header-sort-div">
-                  <button class="sort-button" id="nameSort">
-                    <i class="fa-solid fa-arrow-up-a-z" id="name-alpha-sort"></i>
-                  </button>
-                </div>
-              </th>
-            </div>
-            <div class="table-header-container">
-              <th>
-                <div class="table-header-field">
-                  Phone
-                </div>
-                <div class="table-header-sort-div">
-                  <button class="sort-button" id="phoneSort">
-                    <i class="fa-solid fa-arrow-up-1-9" id="phone-number-sort"></i>
-                  </button>
-                </div>
-              </th>
-            </div>
-            <div class="table-header-container">
-              <th>
-                <div class="table-header-field">
-                  Email
-                </div>
-                <div class="table-header-sort-div">
-                  <button class="sort-button" id="emailSort">
-                    <i class="fa-solid fa-arrow-up-a-z" id="email-alpha-sort"></i>
-                  </button>
-                </div>
-              </th>
-            </div>
-          </tr>
-        </thead>
-        <tbody id="contacts-table-body">
-          <!-- Loaded contacts will be inserted here -->
-        </tbody>
-      </table>
-    </div>
-    
+  </footer>
   </body>
 
 </html>

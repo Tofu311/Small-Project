@@ -2,32 +2,47 @@
 <html>
 
   <head>
-    <meta charset = "UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team 6 Contacts DEV</title>
+    <title>Spooky Contacts</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/login-and-signup.css">
   </head>
 
   <body>
-    <div id="contacts-header">
-      TEAM 6 CONTACTS
-    </div>
+    <links>
+      <a onclick="switchToSignup();">Sign Up</a>
+      <a onclick="switchToLogin();">Log In</a>
+    </links>
+    <header>
+      Team 6 Contacts
+  </header>
 
+  <div class="hero-section">
     <div id="login-or-signup-box">
-      <h id="login-or-signup-header">Login</h>
+      <header id="login-or-signup-header">Login</header>
       <p id="login-or-signup-result"></p>
-      <h1 class="above-field-text"> Username </h1>
+      <h1 class="above-field-text"> Spooky Username </h1>
         <input class="input-field" type="text" placeholder="Enter Username" id="username">
-      <h1 class="above-field-text"> Password </h1>
+      <h1 class="above-field-text"> Spooky Password </h1>
         <input class="input-field" type="password" placeholder="Enter Password" id="password">
+        <br>
         <button id="show-password-button">Show password</button>
-      <button id="login-or-signup-button" type="submit" onclick="doLogin();">Log in</button>
+        <br>
+        <br>
+      <button class="btn" type="submit" onclick="doLogin();">Log in</button>
       <div id="switch-login-or-signup">
         <p id="switch-login-or-signup-text">No account?</p>
         <button id="switch-login-or-signup-button" type="submit" onclick="switchToSignup();">Sign up</button>
       </div>
     </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+        &copy; 2024 Team Six. No rights reserved.
+    </div>
+  </footer>
 
     <script src="js/code.js"></script>
   </body>

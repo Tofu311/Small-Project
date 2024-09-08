@@ -4,12 +4,14 @@
     margin-top: 50px;
     background-color: lightgrey;
     padding: 10px;
+    opacity: .9;
 }
 
 #login-or-signup-header {
     font-size: 36px;
     text-align: center;
     display: block;
+
 }
 
 #login-or-signup-result {
@@ -27,14 +29,6 @@
 
 .input-field {
     padding: 3px;
-}
-
-#login-or-signup-button {
-    margin-top: 10px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    display: block;
-    cursor: pointer;
 }
 
 #switch-login-or-signup {
