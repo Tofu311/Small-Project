@@ -41,17 +41,21 @@ function doAddContact() {
         console.log("Error in adding contact: cant find userId");
         return;
     }
-    let newName = document.getElementById('new-name').value;
+    let newFirstName = document.getElementById('new-firstname').value;
+    let newLastName = document.getElementById('new-lastname').value;
     let newPhone = document.getElementById('new-phone').value;
     let newEmail = document.getElementById('new-email').value;
-    if (newName === '' || newPhone === '' || newEmail == '') {
+    if (newFirstName === '' || newLastName === '' || newPhone === '' || newEmail === '') {
         document.getElementById("add-contact-result").innerHTML = "Please enter a value for all fields";
         return;
     }
+    let newName = newFirstName + ' ' + newLastName;
     let request = {
-        "Name": newName,
-        "Phone": newPhone,
-        "Email": newEmail,
+        "firstname": newFirstName,
+        "lastname": newLastName,
+        "name": newName,
+        "phone": newPhone,
+        "email": newEmail,
         "userID": userId
     }
     let xhr = new XMLHttpRequest();
@@ -181,6 +185,8 @@ const addContactPopup = document.querySelector('#add-contact-popup');
 const openAddContactPopup = document.querySelector('#open-add-contact-popup-button');
 const closeAddContactPopup = document.querySelector('#close-add-contact-popup-button');
 
+console.log(openAddContactPopup);
+
 // Open the add contact popup when the "Add Contact" button is clicked
 openAddContactPopup.addEventListener('click', () => {
     addContactPopup.showModal();
@@ -190,7 +196,8 @@ openAddContactPopup.addEventListener('click', () => {
 // and reset the fields inside the popup
 closeAddContactPopup.addEventListener('click', () => {
     addContactPopup.close();
-    document.getElementById("new-name").value = '';
+    document.getElementById("new-firstname").value = '';
+    document.getElementById("new-lastname").value = '';
     document.getElementById("new-phone").value = '';
     document.getElementById("new-email").value = '';
     document.getElementById("add-contact-result").innerHTML = '';
