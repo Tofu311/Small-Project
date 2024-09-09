@@ -1,4 +1,4 @@
-const API_URL = "http://167.99.3.65/LAMPAPI";
+const API_URL = "http://team6.xyz/LAMPAPI";
 function switchToLogin() {
     window.location.href = "index.html";
 }

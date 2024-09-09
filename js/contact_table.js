@@ -37,9 +37,9 @@ function loadAllContacts() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["Name"]}</td>
-                    <td>${contact["Phone"]}</td>
-                    <td>${contact["Email"]}</td>
+                    <td id="contact-name">${contact["Name"]}</td>
+                    <td id="contact-phone">${contact["Phone"]}</td>
+                    <td id="contact-email">${contact["Email"]}</td>
                     <td>${actionButtonHTML}</td>
                 </tr>`);
             }
@@ -94,6 +94,54 @@ function doAddContact() {
     }
     catch (err) {
         document.getElementById("add-contact-result").innerHTML = err.message;
+    }
+}
+
+function doDeleteContact() {
+    const DELTECONTACT_ENDPOINT = API_URL + "/DeleteContact.php"
+    if (userId == null) {
+        console.log("Error in adding contact: cant find userId");
+        return;
+    }
+    // Gather contact information to delete
+    let contactName = document.getElementById("contact-name").textContent;
+    let contactPhone = document.getElementById("contact-phone").textContent;
+    let contactEmail = document.getElementById("contact-email").textContent;
+
+    // Gather all of the rows in the table
+    let table = document.getElementById("contacts-table-body");
+    let rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+    let request = {
+        "name": contactName,
+        "phone": contactPhone,
+        "email": contactEmail,
+        "userID": userId
+    };
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", DELTECONTACT_ENDPOINT, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = () => {
+            if(this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                if(response["error"] === "") {
+                    // Loop through table to find contact to delete
+                    for(let i = 0; i < rows.length; i++) {
+                        const nameCell = rows[i].getElementById("contact-name");
+                        const phoneCell = rows[i].getElementById("contact-phone");
+                        const emailCell = rows[i].getElementById("contact-email");
+
+                        if((nameCell && nameCell.textContent === contactName) && (phoneCell && phoneCell.textContent === contactPhone) && (emailCell && emailCell.textContent === contactEmail)) {
+                            table.deleteRow(i + 1); // Adjusted for the header row
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    catch (err) {
+
     }
 }
 
