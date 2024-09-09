@@ -1,6 +1,6 @@
-#contacts-table-header {
+#contacts-table-title {
     margin-bottom: 10px;
-    
+
 }
 
 contact_header {
@@ -24,7 +24,7 @@ td {
     padding: 5px;
     border-bottom: 1px solid #ddd;
     background-color: #505050;
-    opacity:.9;
+    opacity: .9;
 }
 
 #contacts-table {
@@ -43,13 +43,10 @@ th {
 
 td {
     height: 40px;
+    cursor: pointer;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
+tbody tr:hover {
     background-color: lightgrey;
 }
 
@@ -69,4 +66,12 @@ th button {
     cursor: pointer;
     border: 1px solid;
     margin-right: 0;
+}
+
+#add-contact-submit-button {
+    margin: 10px;
+}
+
+#add-contact-result {
+    color: red;
 }

@@ -16,12 +16,15 @@ function loadAllContacts() {
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log(xhr.responseText);
                 let response = JSON.parse(xhr.responseText);
                 if (response["error"] === "No Records Found") {
                     console.log("Found no contacts for user");
                     return;
                 }
-                contacts = response["results"];
+                // Clear the current table first
+                document.getElementById("contacts-table-body").innerHTML = "";
+                let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += `<tr><td>${contact["Name"]}</td><td>${contact["Phone"]}</td><td>${contact["Email"]}</td></tr>`);
             }
         };
@@ -29,6 +32,48 @@ function loadAllContacts() {
     }
     catch (err) {
         console.log(err.message);
+    }
+}
+
+function doAddContact() {
+    const ADDCONTACT_ENDPOINT = API_URL + "/AddContact.php";
+    if (userId == null) {
+        console.log("Error in adding contact: cant find userId");
+        return;
+    }
+    let newName = document.getElementById('new-name').value;
+    let newPhone = document.getElementById('new-phone').value;
+    let newEmail = document.getElementById('new-email').value;
+    if (newName === '' || newPhone === '' || newEmail == '') {
+        document.getElementById("add-contact-result").innerHTML = "Please enter a value for all fields";
+        return;
+    }
+    let request = {
+        "Name": newName,
+        "Phone": newPhone,
+        "Email": newEmail,
+        "userID": userId
+    }
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", ADDCONTACT_ENDPOINT, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response["error"] === "") {
+                    document.getElementById("add-contact-result").innerHTML = "Contact added successfully";
+                    loadAllContacts();
+                }
+                else {
+                    document.getElementById("add-contact-result").innerHTML = response["error"];
+                }
+            }
+        };
+        xhr.send(JSON.stringify(request));
+    }
+    catch (err) {
+        document.getElementById("add-contact-result").innerHTML = err.message;
     }
 }
 
@@ -102,3 +147,51 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// $(document).ready(function() {
+//     $("#contacts-table-body tr").click(function() {
+//         $(this).addClass('selected').siblings().removeClass('selected');
+//         // var value = $(this).find('td:first').html();
+//         // console.log(value);
+//         $("#contacts-table-body tr .action-buttons").remove();
+
+//         var buttons = `
+//             <span class="action-buttons">
+//             <button class="edit-btn">Edit</button>
+//             <button class="delete-btn">Delete</button>
+//             </span>`;
+//         this.innerHTML += buttons;
+
+//         // Handle Edit button click
+//         $(".edit-btn").click(function(e){
+//             e.stopPropagation(); // Prevent triggering the row click event
+//             alert('Edit button clicked for row: ' + $(this).closest('tr').find('td:first').html());
+//             // Add your custom functionality for Edit here
+//         });
+
+//         $(".delete-btn").click(function(e){
+//             e.stopPropagation(); // Prevent triggering the row click event
+//             choice = confirm('Are you sure you want to delete contact ' + $(this).closest('tr').find('td:first').html() + '?');
+//             // Add your custom functionality for Delete here
+//          });
+//     });
+// });
+
+const addContactPopup = document.querySelector('#add-contact-popup');
+const openAddContactPopup = document.querySelector('#open-add-contact-popup-button');
+const closeAddContactPopup = document.querySelector('#close-add-contact-popup-button');
+
+// Open the add contact popup when the "Add Contact" button is clicked
+openAddContactPopup.addEventListener('click', () => {
+    addContactPopup.showModal();
+})
+
+// Close the add contact popup when the "Close" button is clicked
+// and reset the fields inside the popup
+closeAddContactPopup.addEventListener('click', () => {
+    addContactPopup.close();
+    document.getElementById("new-name").value = '';
+    document.getElementById("new-phone").value = '';
+    document.getElementById("new-email").value = '';
+    document.getElementById("add-contact-result").innerHTML = '';
+})

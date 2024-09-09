@@ -7,8 +7,8 @@
     <title>Team 6 Contacts DEV</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/contacts.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/code.js"></script>
-    <script src="js/contact_table.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
@@ -36,8 +36,28 @@
     </header>
 
     <div class="hero-section">
+
+      <dialog class="modal" id="add-contact-popup">
+        <h2>Add Contact</h2>
+        <button id="close-add-contact-popup-button">Close</button>
+        <p id="add-contact-result"></p>
+        <h3 class="above-field-text">First Name</h3>
+        <input class="input-field" placeholder="Enter First Name" id="new-firstname">
+        <h3 class="above-field-text">Last Name</h3>
+        <input class="input-field" placeholder="Enter Last Name" id="new-lastname">
+        <h3 class="above-field-text">Phone</h3>
+        <input class="input-field" placeholder="Enter Phone" id="new-phone">
+        <h3 class="above-field-text">Email</h3>
+        <input class="input-field" placeholder="Enter Email" id="new-email">
+        <br>
+        <button id="add-contact-submit-button" onclick="doAddContact();">Submit</button>
+      </dialog>
+
       <div id="contacts-table-box">
-        <contact_header id="contacts-table-header">Spooky Contacts</contact_header>
+        <div id="table-title-container">
+          <button id="open-add-contact-popup-button">Add Contact</button>
+          <contact_header id="contacts-table-title">Spooky Contacts</contact_header>
+        </div>
         <table id="contacts-table">
           <thead>
             <tr>
@@ -90,10 +110,7 @@
             </tr>
           </thead>
           <tbody id="contacts-table-body">
-            <tr>
-              <td>hi
-              </td>
-            </tr>
+            <!-- Loaded contacts will be inserted here -->
           </tbody>
         </table>
       </div>
@@ -104,6 +121,9 @@
         &copy; 2024 Team Six. No rights reserved.
     </div>
   </footer>
+
+  <script src="js/contact_table.js"></script>
+
   </body>
 
 </html>
