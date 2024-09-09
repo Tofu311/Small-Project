@@ -3,9 +3,9 @@ let actionButtonHTML =
     <button class="action-button">
         <i class="fa-solid fa-user-pen"></i>
     </button>
-    <button class="action-button">
+    <button class="action-button" id="delete-contact-button">
         <i class="fa-regular fa-trash-can"></i>
-        </button>
+    </button>
 </div>`;
 
 function loadAllContacts() {
@@ -144,6 +144,12 @@ function doDeleteContact() {
 
     }
 }
+
+// Add doDeleteContact() to the button
+let deleteButton = document.getElementById("delete-contact-button");
+deleteButton.addEventListener("click", () => {
+    doDeleteContact();
+});
 
 // Load all contacts initially
 window.onload = () => {
