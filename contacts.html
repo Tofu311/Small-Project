@@ -10,11 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/code.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function() {
-        readCookie();
-      }, false);
-    </script>
 
     <style>
       .hero-section {
@@ -101,7 +96,7 @@
               <div class="table-header-container"></div>
                 <th>
                   <div class="table-header-field">
-                    
+                    Action
                   </div>
                   <div class="table-header-sort-div">
                   </div>
@@ -110,7 +105,22 @@
             </tr>
           </thead>
           <tbody id="contacts-table-body">
-            <!-- Loaded contacts will be inserted here -->
+            <!-- Hard coded data for testing purposes only-->
+             <tr>
+              <td>Test Contact</td>
+              <td>555-555-5555</td>
+              <td>notreal@gmail.com</td>
+              <td>
+                <div class="action-button-container">
+                  <button class="action-button">
+                    <i class="fa-solid fa-user-pen"></i>
+                  </button>
+                  <button class="action-button">
+                    <i class="fa-regular fa-trash-can"></i>
+                  </button>
+                </div>
+              </td>
+             </tr>
           </tbody>
         </table>
       </div>
@@ -121,8 +131,6 @@
         &copy; 2024 Team Six. No rights reserved.
     </div>
   </footer>
-
-  <script src="js/contact_table.js"></script>
 
   </body>
 

@@ -75,3 +75,13 @@ th button {
 #add-contact-result {
     color: red;
 }
+
+.action-button {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.action-button-container {
+    display: flex;
+    justify-content: space-evenly;
+}

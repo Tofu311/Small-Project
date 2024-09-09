@@ -1,3 +1,13 @@
+let actionButtonHTML = 
+`<div class="action-button-container">
+    <button class="action-button">
+        <i class="fa-solid fa-user-pen"></i>
+    </button>
+    <button class="action-button">
+        <i class="fa-regular fa-trash-can"></i>
+        </button>
+</div>`;
+
 function loadAllContacts() {
     const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
     if (userId == null) {
@@ -25,7 +35,13 @@ function loadAllContacts() {
                 // Clear the current table first
                 document.getElementById("contacts-table-body").innerHTML = "";
                 let contacts = response["results"];
-                contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += `<tr><td>${contact["Name"]}</td><td>${contact["Phone"]}</td><td>${contact["Email"]}</td></tr>`);
+                contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
+                `<tr>
+                    <td>${contact["Name"]}</td>
+                    <td>${contact["Phone"]}</td>
+                    <td>${contact["Email"]}</td>
+                    <td>${actionButtonHTML}</td>
+                </tr>`);
             }
         };
         xhr.send(JSON.stringify(request));
