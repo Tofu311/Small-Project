@@ -252,9 +252,10 @@ function clearAddContactDialog() {
     document.getElementById("add-contact-result").innerHTML = '';
 }
 
-// Close the add contact popup when the "Close" button is clicked
+// Close the add contact popup when the "Cancel" button is clicked
 // and reset the fields inside the popup
-closeAddContactPopup.addEventListener('click', () => {
+const cancelAddContactButton = document.getElementById("cancel-add-contact-button");
+cancelAddContactButton.addEventListener('click', () => {
     addContactPopup.close();
     clearAddContactDialog();
-})
+});
