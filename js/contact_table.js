@@ -109,7 +109,7 @@ function doDeleteContact() {
     let contactEmail = document.getElementById("contact-email").textContent;
 
     // Gather all of the rows in the table
-    let table = document.getElementById("contacts-table-body");
+    let table = document.getElementById("contacts-table");
     let rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
     let request = {
         "name": contactName,
