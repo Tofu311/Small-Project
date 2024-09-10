@@ -146,9 +146,13 @@ function doDeleteContact() {
 }
 
 // Add doDeleteContact() to the button
-let deleteButton = document.getElementById("delete-contact-button");
-deleteButton.addEventListener("click", () => {
-    doDeleteContact();
+document.addEventListener("DOMContentLoaded", () => {
+    let deleteButton = document.getElementById("delete-contact-button");
+    if(deleteButton) {
+        deleteButton.addEventListener("click", () => {
+            doDeleteContact();
+        });
+    }
 });
 
 // Load all contacts initially
