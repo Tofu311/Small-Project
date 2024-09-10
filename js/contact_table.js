@@ -52,7 +52,10 @@ function loadAllContacts() {
                         let contactPhone = row.cells[1].textContent;
                         let contactEmail = row.cells[2].textContent;
 
-                        doDeleteContact(contactName, contactPhone, contactEmail, row);
+                        // Ask for user confirmation before deleting contact
+                        if(window.confirm("Are you sure you want to delete this contact?")) {
+                            doDeleteContact(contactName, contactPhone, contactEmail, row);
+                        }
                     });
                 });
             }
@@ -114,7 +117,7 @@ function doAddContact() {
 function doDeleteContact(contactName, contactPhone, contactEmail, row) {
     const DELTECONTACT_ENDPOINT = API_URL + "/DeleteContact.php"
     if (userId == null) {
-        console.log("Error in adding contact: cant find userId");
+        console.log("Error in deleting contact: cant find userId");
         return;
     }
 
