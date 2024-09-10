@@ -37,9 +37,9 @@ function loadAllContacts() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td id="contact-name">${contact["Name"]}</td>
-                    <td id="contact-phone">${contact["Phone"]}</td>
-                    <td id="contact-email">${contact["Email"]}</td>
+                    <td>${contact["Name"]}</td>
+                    <td>${contact["Phone"]}</td>
+                    <td>${contact["Email"]}</td>
                     <td>${actionButtonHTML}</td>
                 </tr>`);
 
@@ -118,9 +118,6 @@ function doDeleteContact(contactName, contactPhone, contactEmail) {
         return;
     }
 
-    // Gather all of the rows in the table
-    let table = document.getElementById("contacts-table");
-    let rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
     let request = {
         "name": contactName,
         "phone": contactPhone,
@@ -128,10 +125,10 @@ function doDeleteContact(contactName, contactPhone, contactEmail) {
         "userID": userId
     };
     let xhr = new XMLHttpRequest();
-    xhr.open("DELETE", DELTECONTACT_ENDPOINT, true);
+    xhr.open("POST", DELTECONTACT_ENDPOINT, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
-        xhr.onreadystatechange = () => {
+        xhr.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 if(response["error"] === "") {
@@ -141,7 +138,7 @@ function doDeleteContact(contactName, contactPhone, contactEmail) {
                 }
             }
         }
-        xhr.send(JSON,stringify(request));
+        xhr.send(JSON.stringify(request));
     }
     catch (err) {
 
