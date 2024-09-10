@@ -10,6 +10,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/code.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        readCookie();
+      }, false);
+    </script>
 
     <style>
       .hero-section {
@@ -115,7 +120,7 @@
                   <button class="action-button">
                     <i class="fa-solid fa-user-pen"></i>
                   </button>
-                  <button class="action-button" id="delete-contact-button">
+                  <button class="action-button" id="delete-contact">
                     <i class="fa-regular fa-trash-can"></i>
                   </button>
                 </div>
@@ -131,6 +136,8 @@
         &copy; 2024 Team Six. No rights reserved.
     </div>
   </footer>
+
+  <script src="js/contact_table.js"></script>
 
   </body>
 
