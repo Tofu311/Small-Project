@@ -118,7 +118,7 @@ function doDeleteContact() {
         "userID": userId
     };
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", DELTECONTACT_ENDPOINT, true);
+    xhr.open("DELETE", DELTECONTACT_ENDPOINT, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = () => {
