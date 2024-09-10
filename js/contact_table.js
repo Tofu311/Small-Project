@@ -52,7 +52,7 @@ function loadAllContacts() {
                         let contactPhone = row.cells[1].textContent;
                         let contactEmail = row.cells[2].textContent;
 
-                        doDeleteContact(contactName, contactPhone, contactEmail);
+                        doDeleteContact(contactName, contactPhone, contactEmail, row);
                     });
                 });
             }
@@ -111,7 +111,7 @@ function doAddContact() {
 }
 
 // Contact info to delete is passed in as an argument and is then searched through the entire contact table
-function doDeleteContact(contactName, contactPhone, contactEmail) {
+function doDeleteContact(contactName, contactPhone, contactEmail, row) {
     const DELTECONTACT_ENDPOINT = API_URL + "/DeleteContact.php"
     if (userId == null) {
         console.log("Error in adding contact: cant find userId");
@@ -132,7 +132,8 @@ function doDeleteContact(contactName, contactPhone, contactEmail) {
             if(this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 if(response["error"] === "") {
-                    loadAllContacts(); // Refresh contact list after deletion
+                    // Remove the row directly from the table without having to reload the entire contact table
+                    row.parentNode.removeChild(row);
                 } else {
                     console.log(response["error"]);
                 }
