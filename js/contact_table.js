@@ -3,7 +3,7 @@ let actionButtonHTML =
     <button class="action-button">
         <i class="fa-solid fa-user-pen"></i>
     </button>
-    <button class="action-button" id="delete-contact-button">
+    <button class="action-button delete-button">
         <i class="fa-regular fa-trash-can"></i>
     </button>
 </div>`;
@@ -26,7 +26,7 @@ function loadAllContacts() {
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(xhr.responseText);
+                //console.log(xhr.responseText);
                 let response = JSON.parse(xhr.responseText);
                 if (response["error"] === "No Records Found") {
                     console.log("Found no contacts for user");
@@ -42,6 +42,19 @@ function loadAllContacts() {
                     <td id="contact-email">${contact["Email"]}</td>
                     <td>${actionButtonHTML}</td>
                 </tr>`);
+
+                // Add event listeners for delete buttons
+                let deleteButtons = document.querySelectorAll('.delete-button');
+                deleteButtons.forEach((button, index) => {
+                    button.addEventListener("click", () => {
+                        let row = button.closest('tr');
+                        let contactName = row.cells[0].textContent;
+                        let contactPhone = row.cells[1].textContent;
+                        let contactEmail = row.cells[2].textContent;
+
+                        doDeleteContact(contactName, contactPhone, contactEmail);
+                    });
+                });
             }
         };
         xhr.send(JSON.stringify(request));
@@ -97,16 +110,13 @@ function doAddContact() {
     }
 }
 
-function doDeleteContact() {
+// Contact info to delete is passed in as an argument and is then searched through the entire contact table
+function doDeleteContact(contactName, contactPhone, contactEmail) {
     const DELTECONTACT_ENDPOINT = API_URL + "/DeleteContact.php"
     if (userId == null) {
         console.log("Error in adding contact: cant find userId");
         return;
     }
-    // Gather contact information to delete
-    let contactName = document.getElementById("contact-name").textContent;
-    let contactPhone = document.getElementById("contact-phone").textContent;
-    let contactEmail = document.getElementById("contact-email").textContent;
 
     // Gather all of the rows in the table
     let table = document.getElementById("contacts-table");
@@ -125,35 +135,18 @@ function doDeleteContact() {
             if(this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 if(response["error"] === "") {
-                    // Loop through table to find contact to delete
-                    for(let i = 0; i < rows.length; i++) {
-                        const nameCell = rows[i].getElementById("contact-name");
-                        const phoneCell = rows[i].getElementById("contact-phone");
-                        const emailCell = rows[i].getElementById("contact-email");
-
-                        if((nameCell && nameCell.textContent === contactName) && (phoneCell && phoneCell.textContent === contactPhone) && (emailCell && emailCell.textContent === contactEmail)) {
-                            table.deleteRow(i + 1); // Adjusted for the header row
-                            break;
-                        }
-                    }
+                    loadAllContacts(); // Refresh contact list after deletion
+                } else {
+                    console.log(response["error"]);
                 }
             }
         }
+        xhr.send(JSON,stringify(request));
     }
     catch (err) {
 
     }
 }
-
-// Add doDeleteContact() to the button
-document.addEventListener("DOMContentLoaded", () => {
-    let deleteButton = document.getElementById("delete-contact-button");
-    if(deleteButton) {
-        deleteButton.addEventListener("click", () => {
-            doDeleteContact();
-        });
-    }
-});
 
 // Load all contacts initially
 window.onload = () => {
