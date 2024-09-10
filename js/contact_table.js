@@ -1,3 +1,13 @@
+let actionButtonHTML = 
+`<div class="action-button-container">
+    <button class="action-button">
+        <i class="fa-solid fa-user-pen"></i>
+    </button>
+    <button class="action-button delete-button">
+        <i class="fa-regular fa-trash-can"></i>
+    </button>
+</div>`;
+
 function loadAllContacts() {
     const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
     if (userId == null) {
@@ -16,7 +26,7 @@ function loadAllContacts() {
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(xhr.responseText);
+                //console.log(xhr.responseText);
                 let response = JSON.parse(xhr.responseText);
                 if (response["error"] === "No Records Found") {
                     console.log("Found no contacts for user");
@@ -25,7 +35,29 @@ function loadAllContacts() {
                 // Clear the current table first
                 document.getElementById("contacts-table-body").innerHTML = "";
                 let contacts = response["results"];
-                contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += `<tr><td>${contact["Name"]}</td><td>${contact["Phone"]}</td><td>${contact["Email"]}</td></tr>`);
+                contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
+                `<tr>
+                    <td>${contact["Name"]}</td>
+                    <td>${contact["Phone"]}</td>
+                    <td>${contact["Email"]}</td>
+                    <td>${actionButtonHTML}</td>
+                </tr>`);
+
+                // Add event listeners for delete buttons
+                let deleteButtons = document.querySelectorAll('.delete-button');
+                deleteButtons.forEach((button, index) => {
+                    button.addEventListener("click", () => {
+                        let row = button.closest('tr');
+                        let contactName = row.cells[0].textContent;
+                        let contactPhone = row.cells[1].textContent;
+                        let contactEmail = row.cells[2].textContent;
+
+                        // Ask for user confirmation before deleting contact
+                        if(window.confirm("Are you sure you want to delete this contact?")) {
+                            doDeleteContact(contactName, contactPhone, contactEmail, row);
+                        }
+                    });
+                });
             }
         };
         xhr.send(JSON.stringify(request));
@@ -78,6 +110,42 @@ function doAddContact() {
     }
     catch (err) {
         document.getElementById("add-contact-result").innerHTML = err.message;
+    }
+}
+
+// Contact info to delete is passed in as an argument and is then searched through the entire contact table
+function doDeleteContact(contactName, contactPhone, contactEmail, row) {
+    const DELTECONTACT_ENDPOINT = API_URL + "/DeleteContact.php"
+    if (userId == null) {
+        console.log("Error in deleting contact: cant find userId");
+        return;
+    }
+
+    let request = {
+        "name": contactName,
+        "phone": contactPhone,
+        "email": contactEmail,
+        "userID": userId
+    };
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", DELTECONTACT_ENDPOINT, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                if(response["error"] === "") {
+                    // Remove the row directly from the table without having to reload the entire contact table
+                    row.parentNode.removeChild(row);
+                } else {
+                    console.log(response["error"]);
+                }
+            }
+        }
+        xhr.send(JSON.stringify(request));
+    }
+    catch (err) {
+
     }
 }
 
