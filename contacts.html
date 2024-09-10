@@ -8,7 +8,6 @@
     <link rel="icon" type="image/x-icon" href="/images/6-pumpkin.ico">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/contacts.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/code.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
@@ -39,24 +38,26 @@
     <div class="hero-section">
 
       <dialog class="modal" id="add-contact-popup">
-        <h2>Add Contact</h2>
-        <button id="close-add-contact-popup-button">Close</button>
+        <div id="add-contact-popup-header">
+          <button id="close-add-contact-popup-button">X</button>
+          <h2 id="add-contact-popup-title">Add Contact</h2>
+        </div>
         <p id="add-contact-result"></p>
-        <h3 class="above-field-text">First Name</h3>
+        <h1 class="above-field-text">First Name</h1>
         <input class="input-field" placeholder="Enter First Name" id="new-firstname">
-        <h3 class="above-field-text">Last Name</h3>
+        <h1 class="above-field-text">Last Name</h1>
         <input class="input-field" placeholder="Enter Last Name" id="new-lastname">
-        <h3 class="above-field-text">Phone</h3>
+        <h1 class="above-field-text">Phone</h1>
         <input class="input-field" placeholder="Enter Phone" id="new-phone">
-        <h3 class="above-field-text">Email</h3>
+        <h1 class="above-field-text">Email</h1>
         <input class="input-field" placeholder="Enter Email" id="new-email">
         <br>
-        <button id="add-contact-submit-button" onclick="doAddContact();">Submit</button>
+        <button class="btn" id="add-contact-submit-button" onclick="doAddContact();">Submit</button>
       </dialog>
 
       <div id="contacts-table-box">
         <div id="table-title-container">
-          <button id="open-add-contact-popup-button">Add Contact</button>
+          <button class="btn" id="open-add-contact-popup-button">Add Contact</button>
           <contact_header id="contacts-table-title">Spooky Contacts</contact_header>
         </div>
         <table id="contacts-table">

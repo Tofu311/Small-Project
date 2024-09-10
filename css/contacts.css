@@ -1,6 +1,9 @@
-#contacts-table-title {
-    margin-bottom: 10px;
+#open-add-contact-popup-button {
+    margin: 10px;
+}
 
+#contacts-table-title {
+    margin-bottom: 0px;
 }
 
 contact_header {
@@ -50,6 +53,7 @@ tbody tr:hover {
     background-color: lightgrey;
 }
 
+
 .table-header-container {
     overflow: auto;
 }
@@ -68,6 +72,16 @@ th button {
     margin-right: 0;
 }
 
+#add-contact-popup {
+    width: 300px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: lightgrey;
+    padding: 10px;
+    opacity: .9;
+}
+
+
 #add-contact-submit-button {
     margin: 10px;
 }
@@ -84,4 +98,22 @@ th button {
 .action-button-container {
     display: flex;
     justify-content: space-evenly;
+}
+
+#add-contact-popup-header {
+    display: flex;
+
+}
+
+#close-add-contact-popup-button {
+    position: sticky;
+    font-size: 20px;
+    margin: 0;
+    top: 0;
+    left: 95%;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    outline: transparant;
+    cursor: pointer;
 }
