@@ -1,5 +1,11 @@
+#table-title-container {
+    position: relative;
+}
+
 #open-add-contact-popup-button {
     margin: 10px;
+    position: absolute;
+    left: 0px;
 }
 
 #contacts-table-title {
