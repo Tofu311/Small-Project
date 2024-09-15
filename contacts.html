@@ -10,11 +10,6 @@
     <link rel="stylesheet" href="css/contacts.css">
     <script src="js/code.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function() {
-        readCookie();
-      }, false);
-    </script>
 
     <style>
       .hero-section {
@@ -32,7 +27,6 @@
 
     <header>
       Spooky Contacts
-
     </header>
 
     <div class="hero-section">
@@ -58,8 +52,16 @@
 
       <div id="contacts-table-box">
         <div id="table-title-container">
-          <button class="btn" id="open-add-contact-popup-button">Add Contact</button>
-          <contact_header id="contacts-table-title">Spooky Contacts</contact_header>
+          <contact_header id="contacts-table-title">My Contacts</contact_header>
+          <div class="search-and-add-container">
+            <div class="search-bar-container">
+              <input class="search-bar" type="search" placeholder="Search contact information">
+              <button class="btn search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <button class="btn" id="open-add-contact-popup-button">Add Contact</button>
+          </div>
         </div>
         <table id="contacts-table">
           <thead>
@@ -113,7 +115,22 @@
             </tr>
           </thead>
           <tbody id="contacts-table-body">
-            <!--Contacts will get loaded from the API-->
+            <!--Hardcoded data for TESTING PURPOSES ONLY-->
+            <tr>
+              <td>Tho Pham</td>
+              <td>555-344-1222</td>
+              <td>tho.pham@ucf.edu</td>
+            </tr>
+            <tr>
+              <td>Aaron Timpko</td>
+              <td>555-222-3444</td>
+              <td>aaron.timpko@ucf.edu</td>
+            </tr>
+            <tr>
+              <td>Christopher Cooper</td>
+              <td>555-123-4567</td>
+              <td>chris.cooper@ucf.edu</td>
+            </tr>
           </tbody>
         </table>
       </div>
