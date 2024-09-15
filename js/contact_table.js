@@ -1,12 +1,23 @@
 const ACTION_BUTTON_HTML = 
 `<div class="action-button-container">
-    <button class="action-button">
+    <button class="action-button update-button">
         <i class="fa-solid fa-user-pen"></i>
     </button>
     <button class="action-button delete-button">
         <i class="fa-regular fa-trash-can"></i>
     </button>
 </div>`;
+
+const updateContactPopup = document.querySelector('#update-contact-popup');
+const closeUpdateContactPopup = document.querySelector('#close-update-contact-popup-button');
+closeUpdateContactPopup.addEventListener('click', () => {
+    updateContactPopup.close();
+    document.getElementById("updated-firstname").value = '';
+    document.getElementById("updated-lastname").value = '';
+    document.getElementById("updated-phone").value = '';
+    document.getElementById("updated-email").value = '';
+    document.getElementById("update-contact-result").innerHTML = '';
+})
 
 function loadAllContacts() {
     const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
@@ -61,6 +72,14 @@ function loadAllContacts() {
                             doDeleteContact(contactName, contactPhone, contactEmail, row);
                         }
                     });
+                });
+                //Add event listeners for update buttons
+                let updateButtons = document.querySelectorAll('.update-button');
+                updateButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        //open update contacts pop up
+                        updateContactPopup.showModal();
+                    })
                 });
             }
         };
@@ -162,6 +181,68 @@ function doDeleteContact(contactName, contactPhone, contactEmail, row) {
     }
 }
 
+//update contact
+function doUpdateContact(contactId, userId){
+    const UPDATECONTACT_ENDPOINT = API_URL + "/UpdateContact.php";
+
+    //cannot update contact if we cannot find userId
+    if (userId == null) {
+        console.log("Error in updating contact: cant find userId");
+        return;
+    }
+    //Grab the contactID
+    let xhr2 = XMLHttpRequest();
+    //gotta figure out how to get from api
+    xhr2.open("GET");
+    let contactId = xhr2.responseText;
+    // Grab the information from the Add Contact form fields
+    let updatedFirstName = document.getElementById('updated-firstname').value;
+    let updatedLastName = document.getElementById('updated-lastname').value;
+    let updatedPhone = document.getElementById('updated-phone').value;
+    let updatedEmail = document.getElementById('updated-email').value;
+    // If the user has not entered a value for all fields
+    if (updatedFirstName === '' || updatedLastName === '' || updatedPhone === '' || updatedEmail === '') {
+        // Prompt them to fill all values, and exit
+        document.getElementById("update-contact-result").innerHTML = "Please enter a value for all fields";
+        return;
+    }
+    //send request with all the info of the contact to be updated by contact id and user id
+    let request = {
+        "phone": updatedPhone,
+        "email": updatedEmail,
+        "userID": userId,
+        "contactID": contactId,
+        "firstname": updatedFirstName,
+        "lastname": updatedLastName
+    };
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", UPDATECONTACT_ENDPOINT, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    // If update Contact was successful
+                    if (response["error"] === "") {
+                        document.getElementById("update-contact-result").innerHTML = "Contact updated successfully";
+                        // Reload the contact table to show the new contact
+                        loadAllContacts();
+                    }
+                    else {
+                        document.getElementById("update-contact-result").innerHTML = response["error"];
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(request));
+        }
+    }
+    catch(err){
+        document.getElementById("update-contact-result").innerHTML = err.message;
+    }
+    
+
+}
 // Load all contacts initially
 window.onload = () => {
     loadAllContacts();
