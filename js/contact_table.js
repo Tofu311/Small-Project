@@ -108,7 +108,9 @@ function doAddContact() {
                 let response = JSON.parse(xhr.responseText);
                 // If Add Contact was successful
                 if (response["error"] === "") {
-                    document.getElementById("add-contact-result").innerHTML = "Contact added successfully";
+                    // Close the modal dialog box
+                    addContactPopup.close();
+                    clearAddContactDialog();
                     // Reload the contact table to show the new contact
                     loadAllContacts();
                 }
@@ -242,13 +244,18 @@ openAddContactPopup.addEventListener('click', () => {
     addContactPopup.showModal();
 })
 
-// Close the add contact popup when the "Close" button is clicked
-// and reset the fields inside the popup
-closeAddContactPopup.addEventListener('click', () => {
-    addContactPopup.close();
+function clearAddContactDialog() {
     document.getElementById("new-firstname").value = '';
     document.getElementById("new-lastname").value = '';
     document.getElementById("new-phone").value = '';
     document.getElementById("new-email").value = '';
     document.getElementById("add-contact-result").innerHTML = '';
-})
+}
+
+// Close the add contact popup when the "Cancel" button is clicked
+// and reset the fields inside the popup
+const cancelAddContactButton = document.getElementById("cancel-add-contact-button");
+cancelAddContactButton.addEventListener('click', () => {
+    addContactPopup.close();
+    clearAddContactDialog();
+});
