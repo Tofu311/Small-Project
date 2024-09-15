@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="css/contacts.css">
     <script src="js/code.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        readCookie();
+      }, false);
+    </script>
 
     <style>
       .hero-section {
@@ -115,22 +120,7 @@
             </tr>
           </thead>
           <tbody id="contacts-table-body">
-            <!--Hardcoded data for TESTING PURPOSES ONLY-->
-            <tr>
-              <td>Tho Pham</td>
-              <td>555-344-1222</td>
-              <td>tho.pham@ucf.edu</td>
-            </tr>
-            <tr>
-              <td>Aaron Timpko</td>
-              <td>555-222-3444</td>
-              <td>aaron.timpko@ucf.edu</td>
-            </tr>
-            <tr>
-              <td>Christopher Cooper</td>
-              <td>555-123-4567</td>
-              <td>chris.cooper@ucf.edu</td>
-            </tr>
+            <!--Contacts will get loaded from the API here-->
           </tbody>
         </table>
       </div>
