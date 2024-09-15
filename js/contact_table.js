@@ -8,6 +8,7 @@ const ACTION_BUTTON_HTML =
     </button>
 </div>`;
 
+//update contact popup variables and event listener
 const updateContactPopup = document.querySelector('#update-contact-popup');
 const closeUpdateContactPopup = document.querySelector('#close-update-contact-popup-button');
 closeUpdateContactPopup.addEventListener('click', () => {
@@ -77,6 +78,7 @@ function loadAllContacts() {
                 let updateButtons = document.querySelectorAll('.update-button');
                 updateButtons.forEach((button) => {
                     button.addEventListener("click", () => {
+                        //get cur information in order to prepopulate
                         let row = button.closest('tr');
                         let curName = row.cells[0].textContent.split(' ');
                         let curFirstName = curName[0];
