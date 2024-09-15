@@ -55,6 +55,24 @@
         <button class="btn" id="add-contact-submit-button" onclick="doAddContact();">Submit</button>
       </dialog>
 
+      <dialog class="modal" id="update-contact-popup"></dialog>
+        <div id="update-contact-popup-header">
+          <button id="close-update-contact-popup-button">X</button>
+          <h2 id="update-contact-popup-title">Update Contact</h2>
+        </div>
+        <p id="update-contact-result"></p>
+        <h1 class="above-field-text">First Name</h1>
+        <input class="input-field" placeholder="Enter New First Name" id="updated-firstname">
+        <h1 class="above-field-text">Last Name</h1>
+        <input class="input-field" placeholder="Enter New Last Name" id="updated-lastname">
+        <h1 class="above-field-text">Phone</h1>
+        <input class="input-field" placeholder="Enter New Phone" id="updated-phone">
+        <h1 class="above-field-text">Email</h1>
+        <input class="input-field" placeholder="Enter New Email" id="updated-email">
+        <br>
+        <button class="btn" id="update-contact-submit-button" onclick="doUpdateContact();">Submit</button>
+      </dialog>
+
       <div id="contacts-table-box">
         <div id="table-title-container">
           <button class="btn" id="open-add-contact-popup-button">Add Contact</button>

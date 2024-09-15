@@ -2,7 +2,6 @@
 
     $inData = getRequestInfo();
     
-    $name = $inData["name"];
     $phone = $inData["phone"];
     $email = $inData["email"];
     $userID = $inData["userID"];
@@ -23,9 +22,16 @@
            exit();
         }
 
+        $formattedPhone = validating($phone);
+
+        if(!$formattedPhone){
+            returnWithError("Invalid Phone number format");
+            exit();
+         }
+
         // Updates contact information based on contact ID and user ID
-        $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ? , LastName = ? , Name = ?, Phone = ?, Email = ? WHERE ID = ? AND UserID = ?");
-        $stmt->bind_param("sssssii", $firstname , $lastname ,$name, $phone, $email, $contactID, $userID);
+        $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ? , LastName = ? , Phone = ?, Email = ? WHERE ID = ? AND UserID = ?");
+        $stmt->bind_param("ssssii", $firstname , $lastname , $formattedPhone, $email, $contactID, $userID);
 
         if($stmt->execute())
         {
@@ -45,6 +51,20 @@
 
         $stmt->close();
         $conn->close();
+    }
+
+    function validating($phone){
+
+        $result = null;
+
+        $filter = preg_replace('/\D/', '', $phone);
+
+        if(preg_match('/^(\d{3})(\d{3})(\d{4})$/', $filter, $matches)){
+            $result = $matches[1] . '-' . $matches[2] . '-' . $matches[3];
+        }
+
+        return $result;
+
     }
 
     function getRequestInfo()
