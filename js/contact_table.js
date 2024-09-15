@@ -77,8 +77,20 @@ function loadAllContacts() {
                 let updateButtons = document.querySelectorAll('.update-button');
                 updateButtons.forEach((button) => {
                     button.addEventListener("click", () => {
+                        let row = button.closest('tr');
+                        let curName = row.cells[0].textContent.split(' ');
+                        let curFirstName = curName[0];
+                        let curLastName = curName[1];
+                        let curPhone = row.cells[1].textContent;
+                        let curEmail = row.cells[2].textContent;
                         //open update contacts pop up
                         updateContactPopup.showModal();
+                        //prepopulate fields w/current first and last name
+                        document.getElementById('updated-firstname').value = curFirstName;
+                        document.getElementById('updated-lastname').value = curLastName;
+                        document.getElementById('updated-phone').value = curPhone;
+                        document.getElementById('updated-email').value = curEmail;
+
                     })
                 });
             }
