@@ -1,15 +1,17 @@
 #table-title-container {
+    display: grid;
+    flex-direction: column;
+    align-items: center;
     position: relative;
 }
 
 #open-add-contact-popup-button {
     margin: 10px;
-    position: absolute;
-    left: 0px;
+    flex-grow: 1;
+    max-width: 15%;
 }
 
 #contacts-table-title {
-    margin-bottom: 0px;
 }
 
 contact_header {
@@ -18,7 +20,6 @@ contact_header {
     font-size: 64px;
     font-weight: bold;
     text-shadow: 2px 2px 5px black;
-
 }
 
 #contacts-table-box {
@@ -120,6 +121,27 @@ th button {
     width: 32px;
     height: 32px;
     background-color: transparent;
-    outline: transparant;
+    outline: transparent;
     cursor: pointer;
+}
+
+.search-bar {
+    width: 35%;
+    line-height: 3em;
+    float: left;
+    margin-right: 5px;
+}
+
+.search-bar-container {
+    flex-grow: 2;
+}
+
+.search-and-add-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-button {
+    float: left;
 }

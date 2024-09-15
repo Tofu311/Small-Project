@@ -32,7 +32,6 @@
 
     <header>
       Spooky Contacts
-
     </header>
 
     <div class="hero-section">
@@ -58,8 +57,16 @@
 
       <div id="contacts-table-box">
         <div id="table-title-container">
-          <button class="btn" id="open-add-contact-popup-button">Add Contact</button>
-          <contact_header id="contacts-table-title">Spooky Contacts</contact_header>
+          <contact_header id="contacts-table-title">My Contacts</contact_header>
+          <div class="search-and-add-container">
+            <div class="search-bar-container">
+              <input class="search-bar" type="search" placeholder="Search contact information">
+              <button class="btn search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <button class="btn" id="open-add-contact-popup-button">Add Contact</button>
+          </div>
         </div>
         <table id="contacts-table">
           <thead>
@@ -113,7 +120,7 @@
             </tr>
           </thead>
           <tbody id="contacts-table-body">
-            <!--Contacts will get loaded from the API-->
+            <!--Contacts will get loaded from the API here-->
           </tbody>
         </table>
       </div>
