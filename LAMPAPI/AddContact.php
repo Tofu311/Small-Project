@@ -4,7 +4,6 @@
     
     $firstname = $inData["firstname"];
     $lastname = $inData["lastname"];
-    $name = $inData["name"];
     $phone = $inData["phone"];
     $email = $inData["email"];
     $userID = $inData["userID"];
@@ -22,8 +21,15 @@
             exit();
          }
 
-        $stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Name, Phone, Email, UserID) VALUES (?,?,?, ?, ?, ?)");
-        $stmt->bind_param("sssssi",$firstname,$lastname,$name, $phone, $email, $userID);
+         $formattedPhone = validating($phone);
+
+         if(!$formattedPhone){
+             returnWithError("Invalid Phone number format");
+             exit();
+          }
+
+        $stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserID) VALUES (?,?, ?, ?, ?)");
+        $stmt->bind_param("ssssi",$firstname,$lastname, $formattedPhone, $email, $userID);
 
         if($stmt->execute())
         {
@@ -36,6 +42,20 @@
 
         $stmt->close();
         $conn->close();
+    }
+
+    function validating($phone){
+
+        $result = null;
+
+        $filter = preg_replace('/\D/', '', $phone);
+
+        if(preg_match('/^(\d{3})(\d{3})(\d{4})$/', $filter, $matches)){
+            $result = $matches[1] . '-' . $matches[2] . '-' . $matches[3];
+        }
+
+        return $result;
+
     }
 
     function getRequestInfo()

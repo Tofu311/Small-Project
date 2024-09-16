@@ -125,6 +125,41 @@ th button {
     cursor: pointer;
 }
 
+#update-contact-popup {
+    width: 300px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: lightgrey;
+    padding: 10px;
+    opacity: .9;
+}
+
+#update-contact-submit-button {
+    margin: 10px;
+}
+
+#update-contact-result {
+    color: red;
+}
+
+#update-contact-popup-header {
+    display: flex;
+
+}
+
+#close-update-contact-popup-button {
+    position: sticky;
+    font-size: 20px;
+    margin: 0;
+    top: 0;
+    left: 95%;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    outline: transparant;
+    cursor: pointer;
+}
+
 .search-bar {
     width: 35%;
     line-height: 3em;
@@ -145,3 +180,4 @@ th button {
 .search-button {
     float: left;
 }
+
