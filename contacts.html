@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="css/contacts.css">
     <script src="js/code.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         readCookie();
       }, false);
-    </script>
+    </script> -->
 
     <style>
       .hero-section {
@@ -38,7 +38,6 @@
 
       <dialog class="modal" id="add-contact-popup">
         <div id="add-contact-popup-header">
-          <!--<button id="close-add-contact-popup-button">X</button>-->
           <h2 id="add-contact-popup-title">Add Contact</h2>
         </div>
         <p id="add-contact-result"></p>
@@ -55,9 +54,8 @@
         <button class="btn-secondary" id="cancel-add-contact-button">Cancel</button>
       </dialog>
 
-      <dialog class="modal" id="update-contact-popup"></dialog>
+      <dialog class="modal" id="update-contact-popup">
         <div id="update-contact-popup-header">
-          <button id="close-update-contact-popup-button">X</button>
           <h2 id="update-contact-popup-title">Update Contact</h2>
         </div>
         <p id="update-contact-result"></p>
@@ -70,16 +68,17 @@
         <h1 class="above-field-text">Email</h1>
         <input class="input-field" placeholder="Enter New Email" id="updated-email">
         <br>
-        <button class="btn" id="update-contact-submit-button" onclick="doUpdateContact();">Submit</button>
+        <button class="btn" id="update-contact-submit-button" onclick="doUpdateContact();">Save</button>
+        <button class="btn-secondary" id="cancel-update-contact-button">Cancel</button>      
       </dialog>
 
       <div id="contacts-table-box">
         <div id="table-title-container">
           <contact_header id="contacts-table-title">My Contacts</contact_header>
           <div class="search-and-add-container">
-            <div class="search-bar-container">
-              <input class="search-bar" type="search" placeholder="Search contact information">
-              <button class="btn search-button">
+            <div id="search-bar-container">
+              <input id="search-bar" type="search" placeholder="Search contact information">
+              <button class="btn search-button" onclick="doSearchContact();">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>

@@ -160,14 +160,16 @@ th button {
     cursor: pointer;
 }
 
-.search-bar {
+#search-bar {
     width: 35%;
     line-height: 3em;
     float: left;
     margin-right: 5px;
 }
 
-.search-bar-container {
+#search-bar-container {
+    display: flex;
+    align-items: center;
     flex-grow: 2;
 }
 
@@ -181,3 +183,21 @@ th button {
     float: left;
 }
 
+#filter-box {
+    background-color: black;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+#filter-criteria-text {
+    font-weight: bold;
+}
+
+#clear-filter-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 25px;
+    height: 30px;
+    border-radius: 3px;
+}
