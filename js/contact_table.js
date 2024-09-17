@@ -29,9 +29,10 @@ function loadAllContacts() {
     }
     // General search request to return all contacts for the user
     let request = {
-        "Name": "",
-        "Phone": "",
-        "Email": "",
+        "firstname": "",
+        "lastname": "",
+        "phone": "",
+        "email": "",
         "userID": userId
     }
     let xhr = new XMLHttpRequest();
@@ -51,7 +52,9 @@ function loadAllContacts() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["Name"]}</td>
+                    <td>${contact["ID"]}</td>
+                    <td>${contact["FirstName"]}</td>
+                    <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
                     <td>${contact["Email"]}</td>
                     <td>${ACTION_BUTTON_HTML}</td>
@@ -63,14 +66,12 @@ function loadAllContacts() {
                     button.addEventListener("click", () => {
                         // Extract the content of the contact/row the user wants to delete
                         let row = button.closest('tr');
-                        let contactName = row.cells[0].textContent;
-                        let contactPhone = row.cells[1].textContent;
-                        let contactEmail = row.cells[2].textContent;
+                        let contactID = row.cells[0].textContent;
 
                         // Ask for user confirmation before deleting contact
                         if(window.confirm("Are you sure you want to delete this contact?")) {
                             // If OK, delete the contact.
-                            doDeleteContact(contactName, contactPhone, contactEmail, row);
+                            doDeleteContact(contactID, row);
                         }
                     });
                 });
@@ -160,7 +161,7 @@ function doAddContact() {
 }
 
 // Contact info to delete is passed in as an argument and is then searched through the entire contact table
-function doDeleteContact(contactName, contactPhone, contactEmail, row) {
+function doDeleteContact(contactID, row) {
     const DELTECONTACT_ENDPOINT = API_URL + "/DeleteContact.php"
     // Cannot delete a contact for a user if we cannot find their ID
     if (userId == null) {
@@ -169,9 +170,7 @@ function doDeleteContact(contactName, contactPhone, contactEmail, row) {
     }
     // Send a delete request with all the info of the contact to be deleted by exact match (SHOULD BE CHANGED TO DELETE BY CONTACT ID)
     let request = {
-        "name": contactName,
-        "phone": contactPhone,
-        "email": contactEmail,
+        "contactID": contactID,
         "userID": userId
     };
     let xhr = new XMLHttpRequest();
@@ -272,9 +271,10 @@ function doSearchContact() {
     }
     // Search request to return all contacts for user that fit the search criteria
     let request = {
-        "Name": search_criteria,
-        "Phone": search_criteria,
-        "Email": search_criteria,
+        "firstname": search_criteria,
+        "lastname": search_criteria,
+        "phone": search_criteria,
+        "email": search_criteria,
         "userID": userId
     }
     let xhr = new XMLHttpRequest();
@@ -308,7 +308,9 @@ function doSearchContact() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["Name"]}</td>
+                    <td>${contact["ID"]}</td>
+                    <td>${contact["FirstName"]}</td>
+                    <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
                     <td>${contact["Email"]}</td>
                     <td>${ACTION_BUTTON_HTML}</td>
@@ -320,14 +322,12 @@ function doSearchContact() {
                     button.addEventListener("click", () => {
                         // Extract the content of the contact/row the user wants to delete
                         let row = button.closest('tr');
-                        let contactName = row.cells[0].textContent;
-                        let contactPhone = row.cells[1].textContent;
-                        let contactEmail = row.cells[2].textContent;
+                        let contactID = row.cells[0].textContent;
 
                         // Ask for user confirmation before deleting contact
                         if(window.confirm("Are you sure you want to delete this contact?")) {
                             // If OK, delete the contact.
-                            doDeleteContact(contactName, contactPhone, contactEmail, row);
+                            doDeleteContact(contactID, row);
                         }
                     });
                 });
@@ -374,9 +374,9 @@ window.onload = () => {
 }
 
 // Contact Table Sorting functionality
-let sortDirections = [true, true, true]; // True = Ascending, False = Descending
-let tableHeaders = ["nameSort", "phoneSort", "emailSort"];
-let tableHeaderButtonIds = ["name-alpha-sort", "phone-number-sort", "email-alpha-sort"];
+let sortDirections = [true, true, true, true]; // True = Ascending, False = Descending
+let tableHeaders = ["firstNameSort", "lastNameSort", "phoneSort", "emailSort"];
+let tableHeaderButtonIds = ["first-name-alpha-sort", "last-name-alpha-sort", "phone-number-sort", "email-alpha-sort"];
 
 function sortTable(columnIndex) {
     let table = document.getElementById("contacts-table");

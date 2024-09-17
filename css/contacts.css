@@ -11,9 +11,6 @@
     max-width: 15%;
 }
 
-#contacts-table-title {
-}
-
 contact_header {
     padding: 20px;
     color: #ff751a;
@@ -53,7 +50,6 @@ th {
 
 td {
     height: 40px;
-    cursor: pointer;
 }
 
 tbody tr:hover {
