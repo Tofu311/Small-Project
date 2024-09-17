@@ -10,7 +10,7 @@ const ACTION_BUTTON_HTML =
 
 //update contact popup variables and event listener
 const updateContactPopup = document.querySelector('#update-contact-popup');
-const closeUpdateContactPopup = document.querySelector('#close-update-contact-popup-button');
+const closeUpdateContactPopup = document.querySelector('#cancel-update-contact-button');
 closeUpdateContactPopup.addEventListener('click', () => {
     updateContactPopup.close();
     document.getElementById("updated-firstname").value = '';
@@ -29,9 +29,10 @@ function loadAllContacts() {
     }
     // General search request to return all contacts for the user
     let request = {
-        "Name": "",
-        "Phone": "",
-        "Email": "",
+        "firstname": "",
+        "lastname": "",
+        "phone": "",
+        "email": "",
         "userID": userId
     }
     let xhr = new XMLHttpRequest();
@@ -51,7 +52,9 @@ function loadAllContacts() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["Name"]}</td>
+                    <td>${contact["ID"]}</td>
+                    <td>${contact["FirstName"]}</td>
+                    <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
                     <td>${contact["Email"]}</td>
                     <td>${ACTION_BUTTON_HTML}</td>
@@ -63,14 +66,12 @@ function loadAllContacts() {
                     button.addEventListener("click", () => {
                         // Extract the content of the contact/row the user wants to delete
                         let row = button.closest('tr');
-                        let contactName = row.cells[0].textContent;
-                        let contactPhone = row.cells[1].textContent;
-                        let contactEmail = row.cells[2].textContent;
+                        let contactID = row.cells[0].textContent;
 
                         // Ask for user confirmation before deleting contact
                         if(window.confirm("Are you sure you want to delete this contact?")) {
                             // If OK, delete the contact.
-                            doDeleteContact(contactName, contactPhone, contactEmail, row);
+                            doDeleteContact(contactID, row);
                         }
                     });
                 });
@@ -160,7 +161,7 @@ function doAddContact() {
 }
 
 // Contact info to delete is passed in as an argument and is then searched through the entire contact table
-function doDeleteContact(contactName, contactPhone, contactEmail, row) {
+function doDeleteContact(contactID, row) {
     const DELTECONTACT_ENDPOINT = API_URL + "/DeleteContact.php"
     // Cannot delete a contact for a user if we cannot find their ID
     if (userId == null) {
@@ -169,9 +170,7 @@ function doDeleteContact(contactName, contactPhone, contactEmail, row) {
     }
     // Send a delete request with all the info of the contact to be deleted by exact match (SHOULD BE CHANGED TO DELETE BY CONTACT ID)
     let request = {
-        "name": contactName,
-        "phone": contactPhone,
-        "email": contactEmail,
+        "contactID": contactID,
         "userID": userId
     };
     let xhr = new XMLHttpRequest();
@@ -198,7 +197,7 @@ function doDeleteContact(contactName, contactPhone, contactEmail, row) {
 }
 
 //update contact
-function doUpdateContact(contactId, userId){
+function doUpdateContact(){
     const UPDATECONTACT_ENDPOINT = API_URL + "/UpdateContact.php";
 
     //cannot update contact if we cannot find userId
@@ -207,10 +206,10 @@ function doUpdateContact(contactId, userId){
         return;
     }
     //Grab the contactID
-    let xhr2 = XMLHttpRequest();
-    //gotta figure out how to get from api
-    xhr2.open("GET");
-    let contactId = xhr2.responseText;
+    //let xhr2 = XMLHttpRequest();
+    // //gotta figure out how to get from api
+    // xhr2.open("GET");
+    // let contactId = xhr2.responseText;
     // Grab the information from the Add Contact form fields
     let updatedFirstName = document.getElementById('updated-firstname').value;
     let updatedLastName = document.getElementById('updated-lastname').value;
@@ -256,18 +255,128 @@ function doUpdateContact(contactId, userId){
     catch(err){
         document.getElementById("update-contact-result").innerHTML = err.message;
     }
-    
-
 }
+
+function doSearchContact() {
+    const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
+    // Cannot load the contacts if we cannot find the user's ID
+    if (userId == null) {
+        console.log("error: userId undefined");
+        return;
+    }
+    let search_criteria = document.getElementById("search-bar").value;
+    // Cannot search for empty value
+    if (search_criteria == null) {
+        return;
+    }
+    // Search request to return all contacts for user that fit the search criteria
+    let request = {
+        "firstname": search_criteria,
+        "lastname": search_criteria,
+        "phone": search_criteria,
+        "email": search_criteria,
+        "userID": userId
+    }
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", SEARCH_ENDPOINT, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response["error"] === "No Records Found") {
+                    // Put empty table
+                    document.getElementById("contacts-table-body").innerHTML = "";
+                    return;
+                }
+                let filterBox = document.getElementById("filter-box");
+                if (filterBox) {
+                    filterBox.remove();
+                }
+                document.getElementById("search-bar-container").innerHTML += `
+                <div id="filter-box">
+                    <h id="showing-results-for-text">Showing results for</h>
+                    <h id="filter-criteria-text">${search_criteria}</h>
+                    <button id="clear-filter-button" onclick="clearSearchFilter();">
+                        <i class="fa-solid fa-xmark fa-2xl" style="color: white;"></i>
+                    </button>
+                </div>
+                `;
+                // Clear the current table first to account for table reloads that aren't on page loads
+                document.getElementById("contacts-table-body").innerHTML = "";
+                // Parse the returned contacts and each to the contacts table body
+                let contacts = response["results"];
+                contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
+                `<tr>
+                    <td>${contact["ID"]}</td>
+                    <td>${contact["FirstName"]}</td>
+                    <td>${contact["LastName"]}</td>
+                    <td>${contact["Phone"]}</td>
+                    <td>${contact["Email"]}</td>
+                    <td>${ACTION_BUTTON_HTML}</td>
+                </tr>`);
+
+                // Add event listeners for delete buttons
+                let deleteButtons = document.querySelectorAll('.delete-button');
+                deleteButtons.forEach((button, index) => {
+                    button.addEventListener("click", () => {
+                        // Extract the content of the contact/row the user wants to delete
+                        let row = button.closest('tr');
+                        let contactID = row.cells[0].textContent;
+
+                        // Ask for user confirmation before deleting contact
+                        if(window.confirm("Are you sure you want to delete this contact?")) {
+                            // If OK, delete the contact.
+                            doDeleteContact(contactID, row);
+                        }
+                    });
+                });
+                //Add event listeners for update buttons
+                let updateButtons = document.querySelectorAll('.update-button');
+                updateButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        //get cur information in order to prepopulate
+                        let row = button.closest('tr');
+                        let curName = row.cells[0].textContent.split(' ');
+                        let curFirstName = curName[0];
+                        let curLastName = curName[1];
+                        let curPhone = row.cells[1].textContent;
+                        let curEmail = row.cells[2].textContent;
+                        //open update contacts pop up
+                        updateContactPopup.showModal();
+                        //prepopulate fields w/current first and last name
+                        document.getElementById('updated-firstname').value = curFirstName;
+                        document.getElementById('updated-lastname').value = curLastName;
+                        document.getElementById('updated-phone').value = curPhone;
+                        document.getElementById('updated-email').value = curEmail;
+
+                    })
+                });
+            }
+        };
+        xhr.send(JSON.stringify(request));
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+}
+
+
+function clearSearchFilter() {
+    let filterBox = document.getElementById("filter-box");
+    filterBox.remove();
+    loadAllContacts();
+}
+
 // Load all contacts initially
 window.onload = () => {
     loadAllContacts();
 }
 
 // Contact Table Sorting functionality
-let sortDirections = [true, true, true]; // True = Ascending, False = Descending
-let tableHeaders = ["nameSort", "phoneSort", "emailSort"];
-let tableHeaderButtonIds = ["name-alpha-sort", "phone-number-sort", "email-alpha-sort"];
+let sortDirections = [true, true, true, true]; // True = Ascending, False = Descending
+let tableHeaders = ["firstNameSort", "lastNameSort", "phoneSort", "emailSort"];
+let tableHeaderButtonIds = ["first-name-alpha-sort", "last-name-alpha-sort", "phone-number-sort", "email-alpha-sort"];
 
 function sortTable(columnIndex) {
     let table = document.getElementById("contacts-table");

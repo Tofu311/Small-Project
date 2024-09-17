@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team 6 Contacts DEV</title>
+    <title>Spooky Contacts</title>
     <link rel="icon" type="image/x-icon" href="/images/6-pumpkin.ico">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/contacts.css">
@@ -38,7 +38,6 @@
 
       <dialog class="modal" id="add-contact-popup">
         <div id="add-contact-popup-header">
-          <!--<button id="close-add-contact-popup-button">X</button>-->
           <h2 id="add-contact-popup-title">Add Contact</h2>
         </div>
         <p id="add-contact-result"></p>
@@ -55,9 +54,8 @@
         <button class="btn-secondary" id="cancel-add-contact-button">Cancel</button>
       </dialog>
 
-      <dialog class="modal" id="update-contact-popup"></dialog>
+      <dialog class="modal" id="update-contact-popup">
         <div id="update-contact-popup-header">
-          <button id="close-update-contact-popup-button">X</button>
           <h2 id="update-contact-popup-title">Update Contact</h2>
         </div>
         <p id="update-contact-result"></p>
@@ -70,16 +68,17 @@
         <h1 class="above-field-text">Email</h1>
         <input class="input-field" placeholder="Enter New Email" id="updated-email">
         <br>
-        <button class="btn" id="update-contact-submit-button" onclick="doUpdateContact();">Submit</button>
+        <button class="btn" id="update-contact-submit-button" onclick="doUpdateContact();">Save</button>
+        <button class="btn-secondary" id="cancel-update-contact-button">Cancel</button>      
       </dialog>
 
       <div id="contacts-table-box">
         <div id="table-title-container">
           <contact_header id="contacts-table-title">My Contacts</contact_header>
           <div class="search-and-add-container">
-            <div class="search-bar-container">
-              <input class="search-bar" type="search" placeholder="Search contact information">
-              <button class="btn search-button">
+            <div id="search-bar-container">
+              <input id="search-bar" type="search" placeholder="Search contact information">
+              <button class="btn search-button" onclick="doSearchContact();">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
@@ -89,14 +88,35 @@
         <table id="contacts-table">
           <thead>
             <tr>
+              <div class="table-header-container"></div>
+              <th style="width: 0%;">
+                <div class="table-header-field">
+                  ContactID
+                </div>
+                <div class="table-header-sort-div">
+                </div>
+              </th>
+              </div>
               <div class="table-header-container">
                 <th>
                   <div class="table-header-field">
-                    Name
+                    First Name
                   </div>
                   <div class="table-header-sort-div">
-                    <button class="sort-button" id="nameSort">
-                      <i class="fa-solid fa-arrow-up-a-z" id="name-alpha-sort"></i>
+                    <button class="sort-button" id="firstNameSort">
+                      <i class="fa-solid fa-arrow-up-a-z" id="first-name-alpha-sort"></i>
+                    </button>
+                  </div>
+                </th>
+              </div>
+              <div class="table-header-container">
+                <th>
+                  <div class="table-header-field">
+                    Last Name
+                  </div>
+                  <div class="table-header-sort-div">
+                    <button class="sort-button" id="lastNameSort">
+                      <i class="fa-solid fa-arrow-up-a-z" id="last-name-alpha-sort"></i>
                     </button>
                   </div>
                 </th>

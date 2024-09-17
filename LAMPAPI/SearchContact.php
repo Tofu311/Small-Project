@@ -4,7 +4,9 @@
 	
 	$searchResults = "";
 	$searchCount = 0;
-	$name = "%" . $inData["name"] . "%";
+
+	$firstname = $inData["firstname"];
+  $lastname = $inData["lastname"];
 	$phone = "%" . $inData["phone"] . "%";
 	$email = "%" . $inData["email"] . "%"; 
 	$userID = $inData["userID"];
@@ -16,9 +18,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (Name like ? OR Phone like ? OR Email like ?) AND UserID like ?");
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName like ? OR LastName like ? OR Phone like ? OR Email like ?) AND UserID like ?");
 	
-		$stmt->bind_param("sssi", $name, $phone, $email, $userID);
+		$stmt->bind_param("ssssi", $firstname, $lastname, $phone, $email, $userID);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -30,8 +32,12 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
+
+			$searchResults .= '{"ID" : "'. $row["ID"].'", "FirstName" : "'. $row["FirstName"].'", "LastName" : "'. $row["LastName"].'", "Phone" : "'. $row["Phone"].'", "Email" : "'. $row["Email"].'", "UserID" : "'. $row["UserID"].'"}';
+
+
 		
-      $searchResults .= '{"Name" : "'. $row["Name"].'", "Phone" : "'. $row["Phone"].'", "Email" : "'. $row["Email"].'" ,  "UserID" : "'. $row["UserID"].'"}';
+     // $searchResults .= '{"LastName" : "'. $row["LastName"].'", "Phone" : "'. $row["Phone"].'", "Email" : "'. $row["Email"].'" ,  "UserID" : "'. $row["UserID"].'"}';
 		}
 	
 		if( $searchCount == 0 )
