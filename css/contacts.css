@@ -19,10 +19,15 @@ contact_header {
     text-shadow: 2px 2px 5px black;
 }
 
+
 #contacts-table-box {
     margin: auto;
     margin-top: 50px;
     width: 1200px;
+}
+
+#contactID-header{
+    display: none;
 }
 
 #contacts-table,

@@ -82,11 +82,10 @@ function loadAllContacts() {
                         //get cur information in order to prepopulate
                         let row = button.closest('tr');
                         let contactID = row.cells[0].textContent;
-                        let curName = row.cells[1].textContent.split(' ');
-                        let curFirstName = curName[0];
-                        let curLastName = curName[1];
-                        let curPhone = row.cells[2].textContent;
-                        let curEmail = row.cells[3].textContent;
+                        let curFirstName = row.cells[1].textContent;
+                        let curLastName = row.cells[2].textContent;
+                        let curPhone = row.cells[3].textContent;
+                        let curEmail = row.cells[4].textContent;
                         //open update contacts pop up
                         updateContactPopup.showModal();
                         //prepopulate fields w/current first and last name
@@ -335,20 +334,21 @@ function doSearchContact() {
                 let updateButtons = document.querySelectorAll('.update-button');
                 updateButtons.forEach((button) => {
                     button.addEventListener("click", () => {
-                        //get cur information in order to prepopulate
-                        let row = button.closest('tr');
-                        let curName = row.cells[0].textContent.split(' ');
-                        let curFirstName = curName[0];
-                        let curLastName = curName[1];
-                        let curPhone = row.cells[1].textContent;
-                        let curEmail = row.cells[2].textContent;
-                        //open update contacts pop up
-                        updateContactPopup.showModal();
-                        //prepopulate fields w/current first and last name
-                        document.getElementById('updated-firstname').value = curFirstName;
-                        document.getElementById('updated-lastname').value = curLastName;
-                        document.getElementById('updated-phone').value = curPhone;
-                        document.getElementById('updated-email').value = curEmail;
+                       //get cur information in order to prepopulate
+                       let row = button.closest('tr');
+                       let contactID = row.cells[0].textContent;
+                       let curFirstName = row.cells[1].textContent;
+                       let curLastName = row.cells[2].textContent;
+                       let curPhone = row.cells[3].textContent;
+                       let curEmail = row.cells[4].textContent;
+                       //open update contacts pop up
+                       updateContactPopup.showModal();
+                       //prepopulate fields w/current first and last name
+                       document.getElementById('updated-firstname').value = curFirstName;
+                       document.getElementById('updated-lastname').value = curLastName;
+                       document.getElementById('updated-phone').value = curPhone;
+                       document.getElementById('updated-email').value = curEmail;
+                       document.getElementById('contactID').value = contactID;
 
                     })
                 });
