@@ -52,7 +52,7 @@ function loadAllContacts() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["ID"]}</td>
+                    <td id="hidden-contactID">${contact["ID"]}</td>
                     <td>${contact["FirstName"]}</td>
                     <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
@@ -308,7 +308,7 @@ function doSearchContact() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["ID"]}</td>
+                    <td id="hidden-contactID">${contact["ID"]}</td>
                     <td>${contact["FirstName"]}</td>
                     <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>

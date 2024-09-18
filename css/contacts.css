@@ -155,6 +155,9 @@ th button {
     outline: transparant;
     cursor: pointer;
 }
+#hidden-contactID{
+    display:none;
+}
 
 #search-bar {
     width: 35%;
