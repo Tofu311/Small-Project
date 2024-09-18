@@ -51,8 +51,7 @@ function loadAllContacts() {
                 // Parse the returned contacts and each to the contacts table body
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
-                `<tr>
-                    <td id="hidden-contactID">${contact["ID"]}</td>
+                `<tr data-contact-id="${contact["ID"]}">
                     <td>${contact["FirstName"]}</td>
                     <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
@@ -66,7 +65,7 @@ function loadAllContacts() {
                     button.addEventListener("click", () => {
                         // Extract the content of the contact/row the user wants to delete
                         let row = button.closest('tr');
-                        let contactID = row.cells[0].textContent;
+                        let contactID = row.getAttribute('data-contact-id');
 
                         // Ask for user confirmation before deleting contact
                         if(window.confirm("Are you sure you want to delete this contact?")) {
@@ -81,10 +80,9 @@ function loadAllContacts() {
                     button.addEventListener("click", () => {
                         //get cur information in order to prepopulate
                         let row = button.closest('tr');
-                        let contactID = row.cells[0].textContent;
-                        let curName = row.cells[1].textContent.split(' ');
-                        let curFirstName = curName[0];
-                        let curLastName = curName[1];
+                        let contactID = row.getAttribute('data-contact-id');
+                        let curFirstName = row.cells[0].textContent;
+                        let curLastName = row.cells[1].textContent;
                         let curPhone = row.cells[2].textContent;
                         let curEmail = row.cells[3].textContent;
                         //open update contacts pop up
@@ -95,8 +93,6 @@ function loadAllContacts() {
                         document.getElementById('updated-phone').value = curPhone;
                         document.getElementById('updated-email').value = curEmail;
                         document.getElementById('contactID').value = contactID;
-                        
-
                     })
                 });
             }
@@ -193,7 +189,7 @@ function doDeleteContact(contactID, row) {
         xhr.send(JSON.stringify(request));
     }
     catch (err) {
-
+        console.log(err.message);
     }
 }
 
@@ -208,13 +204,13 @@ function doUpdateContact(){
     }
     //Grab the contactID
     
-    
-    // Grab the information from the Add Contact form fields
+    // Grab the information from the Update Contact form fields
     let updatedFirstName = document.getElementById('updated-firstname').value;
     let updatedLastName = document.getElementById('updated-lastname').value;
     let updatedPhone = document.getElementById('updated-phone').value;
     let updatedEmail = document.getElementById('updated-email').value;
     let contactID = document.getElementById('contactID').value;
+    
     // If the user has not entered a value for all fields
     if (updatedFirstName === '' || updatedLastName === '' || updatedPhone === '' || updatedEmail === '') {
         // Prompt them to fill all values, and exit
@@ -234,26 +230,21 @@ function doUpdateContact(){
     xhr.open("POST", UPDATECONTACT_ENDPOINT, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
-        xhr.onreadystatechange = function() {
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    let response = JSON.parse(xhr.responseText);
-                    // If update Contact was successful
-                    if (response["error"] === "") {
-                        document.getElementById("update-contact-result").innerHTML = "Contact updated successfully";
-                        // Reload the contact table to show the new contact
-                        loadAllContacts();
-                    }
-                    else {
-                        document.getElementById("update-contact-result").innerHTML = response["error"];
-                    }
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(this.responseText);
+                if(response["error"] === "") {
+                    updateContactPopup.close();
+                    loadAllContacts(); // Reload the contact list to reflect the update
+                } else {
+                    document.getElementById("update-contact-result").innerHTML = response["error"];
                 }
-            };
-            xhr.send(JSON.stringify(request));
+            }
         }
+        xhr.send(JSON.stringify(request));
     }
     catch(err){
-        document.getElementById("update-contact-result").innerHTML = err.message;
+        console.log(err.message);
     }
 }
 
@@ -307,8 +298,7 @@ function doSearchContact() {
                 // Parse the returned contacts and add each to the contacts table body
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
-                `<tr>
-                    <td id="hidden-contactID">${contact["ID"]}</td>
+                `<tr data-contact-id="${contact["ID"]}">
                     <td>${contact["FirstName"]}</td>
                     <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
@@ -322,7 +312,7 @@ function doSearchContact() {
                     button.addEventListener("click", () => {
                         // Extract the content of the contact/row the user wants to delete
                         let row = button.closest('tr');
-                        let contactID = row.cells[0].textContent;
+                        let contactID = row.getAttribute('data-contact-id');
 
                         // Ask for user confirmation before deleting contact
                         if(window.confirm("Are you sure you want to delete this contact?")) {
@@ -337,11 +327,11 @@ function doSearchContact() {
                     button.addEventListener("click", () => {
                         //get cur information in order to prepopulate
                         let row = button.closest('tr');
-                        let curName = row.cells[0].textContent.split(' ');
-                        let curFirstName = curName[0];
-                        let curLastName = curName[1];
-                        let curPhone = row.cells[1].textContent;
-                        let curEmail = row.cells[2].textContent;
+                        let contactID = row.getAttribute('data-contact-id');
+                        let curFirstName = row.cells[0].textContent;
+                        let curLastName = row.cells[1].textContent;
+                        let curPhone = row.cells[2].textContent;
+                        let curEmail = row.cells[3].textContent;
                         //open update contacts pop up
                         updateContactPopup.showModal();
                         //prepopulate fields w/current first and last name
@@ -349,7 +339,7 @@ function doSearchContact() {
                         document.getElementById('updated-lastname').value = curLastName;
                         document.getElementById('updated-phone').value = curPhone;
                         document.getElementById('updated-email').value = curEmail;
-
+                        document.getElementById('contactID').value = contactID;
                     })
                 });
             }

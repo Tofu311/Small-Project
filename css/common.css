@@ -29,7 +29,7 @@ header {
 
 .hero-section {
     height: 100vh;
-    background: url('halloweenBackground.webp') no-repeat center center/cover;
+    background: url(../images/site_background.svg) no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
