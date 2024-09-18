@@ -52,7 +52,7 @@ function loadAllContacts() {
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["ID"]}</td>
+                    <td id="hidden-contactID">${contact["ID"]}</td>
                     <td>${contact["FirstName"]}</td>
                     <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
@@ -81,11 +81,12 @@ function loadAllContacts() {
                     button.addEventListener("click", () => {
                         //get cur information in order to prepopulate
                         let row = button.closest('tr');
-                        let curName = row.cells[0].textContent.split(' ');
+                        let contactID = row.cells[0].textContent;
+                        let curName = row.cells[1].textContent.split(' ');
                         let curFirstName = curName[0];
                         let curLastName = curName[1];
-                        let curPhone = row.cells[1].textContent;
-                        let curEmail = row.cells[2].textContent;
+                        let curPhone = row.cells[2].textContent;
+                        let curEmail = row.cells[3].textContent;
                         //open update contacts pop up
                         updateContactPopup.showModal();
                         //prepopulate fields w/current first and last name
@@ -93,6 +94,8 @@ function loadAllContacts() {
                         document.getElementById('updated-lastname').value = curLastName;
                         document.getElementById('updated-phone').value = curPhone;
                         document.getElementById('updated-email').value = curEmail;
+                        document.getElementById('contactID').value = contactID;
+                        
 
                     })
                 });
@@ -124,11 +127,9 @@ function doAddContact() {
         return;
     }
     // Formulate Add Contact request
-    let newName = newFirstName + ' ' + newLastName;
     let request = {
         "firstname": newFirstName,
         "lastname": newLastName,
-        "name": newName,
         "phone": newPhone,
         "email": newEmail,
         "userID": userId
@@ -202,19 +203,18 @@ function doUpdateContact(){
 
     //cannot update contact if we cannot find userId
     if (userId == null) {
-        console.log("Error in updating contact: cant find userId");
+        console.log("error: userId undefined");
         return;
     }
     //Grab the contactID
-    //let xhr2 = XMLHttpRequest();
-    // //gotta figure out how to get from api
-    // xhr2.open("GET");
-    // let contactId = xhr2.responseText;
+    
+    
     // Grab the information from the Add Contact form fields
     let updatedFirstName = document.getElementById('updated-firstname').value;
     let updatedLastName = document.getElementById('updated-lastname').value;
     let updatedPhone = document.getElementById('updated-phone').value;
     let updatedEmail = document.getElementById('updated-email').value;
+    let contactID = document.getElementById('contactID').value;
     // If the user has not entered a value for all fields
     if (updatedFirstName === '' || updatedLastName === '' || updatedPhone === '' || updatedEmail === '') {
         // Prompt them to fill all values, and exit
@@ -226,7 +226,7 @@ function doUpdateContact(){
         "phone": updatedPhone,
         "email": updatedEmail,
         "userID": userId,
-        "contactID": contactId,
+        "contactID": contactID,
         "firstname": updatedFirstName,
         "lastname": updatedLastName
     };
@@ -304,11 +304,11 @@ function doSearchContact() {
                 `;
                 // Clear the current table first to account for table reloads that aren't on page loads
                 document.getElementById("contacts-table-body").innerHTML = "";
-                // Parse the returned contacts and each to the contacts table body
+                // Parse the returned contacts and add each to the contacts table body
                 let contacts = response["results"];
                 contacts.forEach((contact) => document.getElementById("contacts-table-body").innerHTML += 
                 `<tr>
-                    <td>${contact["ID"]}</td>
+                    <td id="hidden-contactID">${contact["ID"]}</td>
                     <td>${contact["FirstName"]}</td>
                     <td>${contact["LastName"]}</td>
                     <td>${contact["Phone"]}</td>
