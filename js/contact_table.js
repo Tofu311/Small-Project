@@ -220,8 +220,7 @@ function doUpdateContact(){
         console.log("error: userId undefined");
         return;
     }
-    //Grab the contactID
-    
+
     // Grab the information from the Update Contact form fields
     let updatedFirstName = document.getElementById('updated-firstname').value;
     let updatedLastName = document.getElementById('updated-lastname').value;
