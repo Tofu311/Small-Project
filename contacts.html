@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="css/contacts.css">
     <script src="js/code.js"></script>
     <script src="https://kit.fontawesome.com/9f4a12d141.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         readCookie();
       }, false);
-    </script>
+    </script> -->
 
     <style>
       .hero-section {
@@ -42,13 +42,13 @@
         </div>
         <p id="add-contact-result"></p>
         <h1 class="above-field-text">First Name</h1>
-        <input class="input-field" placeholder="Enter First Name" id="new-firstname">
+        <input class="input-field" placeholder="Enter First Name" id="new-firstname" onkeydown="handleAddContactKeyDown(event);">
         <h1 class="above-field-text">Last Name</h1>
-        <input class="input-field" placeholder="Enter Last Name" id="new-lastname">
+        <input class="input-field" placeholder="Enter Last Name" id="new-lastname" onkeydown="handleAddContactKeyDown(event);">
         <h1 class="above-field-text">Phone</h1>
-        <input class="input-field" placeholder="Enter Phone" id="new-phone">
+        <input class="input-field" placeholder="Enter Phone" id="new-phone" onkeydown="handleAddContactKeyDown(event);">
         <h1 class="above-field-text">Email</h1>
-        <input class="input-field" placeholder="Enter Email" id="new-email">
+        <input class="input-field" placeholder="Enter Email" id="new-email" onkeydown="handleAddContactKeyDown(event);">
         <br>
         <button class="btn" id="add-contact-submit-button" onclick="doAddContact();">Save</button>
         <button class="btn-secondary" id="cancel-add-contact-button">Cancel</button>
@@ -60,13 +60,13 @@
         </div>
         <p id="update-contact-result"></p>
         <h1 class="above-field-text">First Name</h1>
-        <input class="input-field" placeholder="Enter New First Name" id="updated-firstname">
+        <input class="input-field" placeholder="Enter New First Name" id="updated-firstname" onkeydown="handleUpdateContactKeyDown(event);">
         <h1 class="above-field-text">Last Name</h1>
-        <input class="input-field" placeholder="Enter New Last Name" id="updated-lastname">
+        <input class="input-field" placeholder="Enter New Last Name" id="updated-lastname" onkeydown="handleUpdateContactKeyDown(event);">
         <h1 class="above-field-text">Phone</h1>
-        <input class="input-field" placeholder="Enter New Phone" id="updated-phone">
+        <input class="input-field" placeholder="Enter New Phone" id="updated-phone" onkeydown="handleUpdateContactKeyDown(event);">
         <h1 class="above-field-text">Email</h1>
-        <input class="input-field" placeholder="Enter New Email" id="updated-email">
+        <input class="input-field" placeholder="Enter New Email" id="updated-email" onkeydown="handleUpdateContactKeyDown(event);">
         <input type="hidden" id="contactID">
         <br>
         <button class="btn" id="update-contact-submit-button" onclick="doUpdateContact();">Save</button>
@@ -78,7 +78,7 @@
           <contact_header id="contacts-table-title">My Contacts</contact_header>
           <div class="search-and-add-container">
             <div id="search-bar-container">
-              <input id="search-bar" type="search" placeholder="Search contact information">
+              <input id="search-bar" type="search" placeholder="Search contact information" onkeydown="handleSearchBarKeyDown(event);">
               <button class="btn search-button" onclick="doSearchContact();">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>

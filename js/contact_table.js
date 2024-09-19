@@ -20,6 +20,24 @@ closeUpdateContactPopup.addEventListener('click', () => {
     document.getElementById("update-contact-result").innerHTML = '';
 })
 
+function handleSearchBarKeyDown(event) {
+    if (event.key === "Enter") {
+        doSearchContact();
+    }
+}
+
+function handleAddContactKeyDown(event) {
+    if (event.key === "Enter") {
+        doAddContact();
+    }
+}
+
+function handleUpdateContactKeyDown(event) {
+    if (event.key === "Enter") {
+        doUpdateContact();
+    }
+}
+
 function loadAllContacts() {
     const SEARCH_ENDPOINT = API_URL + "/SearchContact.php";
     // Cannot load the contacts if we cannot find the user's ID

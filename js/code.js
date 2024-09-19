@@ -28,10 +28,26 @@ try {
     console.log(err);
 }
 
+function handleLoginKeyDown(event) {
+    if (event.key === "Enter") {
+        doLogin();
+    }
+}
+
+function handleSignupKeyDown(event) {
+    if (event.key === "Enter") {
+        doSignup();
+    }
+}
+
 function doLogin() {
     const LOGIN_ENDPOINT = API_URL + "/Login.php";
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
+    if (username === '' || password === '') {
+        document.getElementById("login-or-signup-result").innerHTML = "Please enter a value for both username and password.";
+        return;
+    }
     let request = {
         "login": username,
         "password": password

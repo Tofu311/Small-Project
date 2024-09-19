@@ -24,9 +24,9 @@
       <header id="login-or-signup-header">Login</header>
       <p id="login-or-signup-result"></p>
       <h1 class="above-field-text"> Spooky Username </h1>
-        <input class="input-field" type="text" placeholder="Enter Username" id="username">
+        <input class="input-field" type="text" placeholder="Enter Username" id="username" onkeydown="handleLoginKeyDown(event);">
       <h1 class="above-field-text"> Spooky Password </h1>
-        <input class="input-field" type="password" placeholder="Enter Password" id="password">
+        <input class="input-field" type="password" placeholder="Enter Password" id="password" onkeydown="handleLoginKeyDown(event);">
         <br>
         <button id="show-password-button">Show password</button>
         <br>
