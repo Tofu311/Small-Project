@@ -1,6 +1,6 @@
 const API_URL = "http://team6.xyz/LAMPAPI";
 function switchToLogin() {
-    window.location.href = "index.html";
+    window.location.href = "login.html";
 }
 
 function switchToSignup() {
@@ -149,7 +149,7 @@ function readCookie() {
 	}
 	
 	if(userId < 0) {
-		window.location.href = "index.html";
+		window.location.href = "login.html";
 	}
 	else {
         console.log(`Welcome ${firstName} ${lastName}`);
