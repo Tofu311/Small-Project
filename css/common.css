@@ -18,13 +18,17 @@ body {
     text-align: center;
 }
 
-header {
-    padding: 20px;
+header,
+header a {
+    padding: 10px;
     color: #ff751a;
     font-size: 36px;
     font-weight: bold;
     text-shadow: 2px 2px 5px black;
+}
 
+.header-title {
+    text-decoration: none;
 }
 
 .hero-section {
