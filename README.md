@@ -1,5 +1,5 @@
 # Team 6 - Spooky Contacts
-[Spooky Contacts](team6.xyz)
+[Spooky Contacts](http://team6.xyz)
 
 ### Project Manager
 Aaron Timpko
