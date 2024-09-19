@@ -1,16 +1,16 @@
 # Team 6 - Spooky Contacts
 [Spooky Contacts](http://team6.xyz)
 
-### Project Manager
+## Project Manager
 Aaron Timpko
 
-## Frontend Developers
-Max Malik
+### Frontend Developers
+Max Malik \
 Gabriel Hertel
 
-## API Developers
-Christopher Cooper
+### API Developers
+Christopher Cooper \
 Fernando Ailon
 
-## Database Manager
+### Database Manager
 Tho Pham
