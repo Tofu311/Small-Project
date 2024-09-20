@@ -86,8 +86,23 @@ function doSignup() {
     let lastName = document.getElementById('lastName').value;
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
+
+    // Check for blank fields
     if (firstName === '' || lastName === '' || username === '' || password === '') {
         document.getElementById("login-or-signup-result").innerHTML = "Please enter a value for all fields.";
+        return;
+    }
+
+    // Define password criteria
+    const lengthCriteria = password.length >= 8;
+    const uppercaseCriteria = /[A-Z]/.test(password);
+    const lowercaseCriteria = /[a-z]/.test(password);
+    const numberCriteria = /\d/.test(password);
+    const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    // Check for password validity. Passwords are at least 8 characters in length, at least 1 uppercase, 1 lowercase, 1 number, and 1 special character
+    if(!(lengthCriteria && uppercaseCriteria && lowercaseCriteria && numberCriteria && specialCharCriteria)) {
+        document.getElementById("login-or-signup-result").innerHTML = "Password must be at least 8 characters long, contain 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character";
         return;
     }
     let request = {

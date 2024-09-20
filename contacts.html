@@ -86,72 +86,64 @@
             <button class="btn" id="open-add-contact-popup-button">Add Contact</button>
           </div>
         </div>
-        <table id="contacts-table">
-          <thead>
-            <tr>
-              <div class="table-header-container">
-                <th>
-                  <div class="table-header-field">
-                    First Name
-                  </div>
-                  <div class="table-header-sort-div">
-                    <button class="sort-button" id="firstNameSort">
-                      <i class="fa-solid fa-arrow-up-a-z" id="first-name-alpha-sort"></i>
-                    </button>
-                  </div>
-                </th>
-              </div>
-              <div class="table-header-container">
-                <th>
-                  <div class="table-header-field">
-                    Last Name
-                  </div>
-                  <div class="table-header-sort-div">
-                    <button class="sort-button" id="lastNameSort">
-                      <i class="fa-solid fa-arrow-up-a-z" id="last-name-alpha-sort"></i>
-                    </button>
-                  </div>
-                </th>
-              </div>
-              <div class="table-header-container">
-                <th>
-                  <div class="table-header-field">
-                    Phone
-                  </div>
-                  <div class="table-header-sort-div">
-                    <button class="sort-button" id="phoneSort">
-                      <i class="fa-solid fa-arrow-up-1-9" id="phone-number-sort"></i>
-                    </button>
-                  </div>
-                </th>
-              </div>
-              <div class="table-header-container">
-                <th>
-                  <div class="table-header-field">
-                    Email
-                  </div>
-                  <div class="table-header-sort-div">
-                    <button class="sort-button" id="emailSort">
-                      <i class="fa-solid fa-arrow-up-a-z" id="email-alpha-sort"></i>
-                    </button>
-                  </div>
-                </th>
-              </div>
-              <div class="table-header-container"></div>
-                <th>
-                  <div class="table-header-field">
-                    Action
-                  </div>
-                  <div class="table-header-sort-div">
-                  </div>
-                </th>
-              </div>
-            </tr>
-          </thead>
-          <tbody id="contacts-table-body">
-            <!--Contacts will get loaded from the API here-->
-          </tbody>
-        </table>
+          <div class="scrollable">
+          <table id="contacts-table">
+            <thead>
+              <tr>
+                  <th>
+                    <div class="table-header-field">
+                      First Name
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="firstNameSort">
+                        <i class="fa-solid fa-arrow-up-a-z" id="first-name-alpha-sort"></i>
+                      </button>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="table-header-field">
+                      Last Name
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="lastNameSort">
+                        <i class="fa-solid fa-arrow-up-a-z" id="last-name-alpha-sort"></i>
+                      </button>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="table-header-field">
+                      Phone
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="phoneSort">
+                        <i class="fa-solid fa-arrow-up-1-9" id="phone-number-sort"></i>
+                      </button>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="table-header-field">
+                      Email
+                    </div>
+                    <div class="table-header-sort-div">
+                      <button class="sort-button" id="emailSort">
+                        <i class="fa-solid fa-arrow-up-a-z" id="email-alpha-sort"></i>
+                      </button>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="table-header-field">
+                      Action
+                    </div>
+                    <div class="table-header-sort-div">
+                    </div>
+                  </th>
+              </tr>
+            </thead>
+            <tbody id="contacts-table-body">
+              <!--Contacts will get loaded from the API here-->
+            </tbody>
+          </table>
+        </div>
       </div>
   </div>
 
