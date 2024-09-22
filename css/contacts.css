@@ -129,9 +129,13 @@ th button {
     width: 300px;
     margin: auto;
     margin-top: 50px;
-    background-color: lightgrey;
     padding: 10px;
-    opacity: .9;
+    background: rgba(49, 38, 62, 0.78);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.8px);
+    -webkit-backdrop-filter: blur(10.8px);
+    border: 1px solid rgba(49, 38, 62, 0.3);
 }
 
 #update-contact-submit-button {
@@ -139,7 +143,7 @@ th button {
 }
 
 #update-contact-result {
-    color: red;
+    color: #ECA72C;
 }
 
 #update-contact-popup-header {
