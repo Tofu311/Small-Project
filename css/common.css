@@ -47,6 +47,10 @@ h1 {
     text-shadow: 3px 3px 20px #000;
 }
 
+h2 {
+    color: #EE5622;
+}
+
 p {
     font-size: 22px;
     color: #EE5622;
@@ -54,12 +58,12 @@ p {
 }
 
 .btn {
-    background-color: #ff6600;
+    background-color: #EE5622;
     border: none;
     padding: 15px 30px;
     font-size: 20px;
     font-weight: bold;
-    color: white;
+    color: #F2F2F2;
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 2px 2px 8px #000;
@@ -84,7 +88,8 @@ p {
 }
 
 .btn-secondary:hover {
-    background-color: #191919;
+    color: #F2F2F2;
+    background-color: #44355B;
 }
 
 footer {

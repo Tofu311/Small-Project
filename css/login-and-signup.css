@@ -2,8 +2,10 @@
     width: 400px;
     margin: auto;
     margin-top: 50px;
+    padding-left: 12px;
+    padding-right: 12px;
     background: rgba(49, 38, 62, 0.78);
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10.8px);
     -webkit-backdrop-filter: blur(10.8px);
@@ -19,7 +21,7 @@
 #login-or-signup-result {
     margin-top: 5px;
     margin-bottom: 0px;
-    color: red;
+    color: #ECA72C;
 }
 
 #switch-login-or-signup {
