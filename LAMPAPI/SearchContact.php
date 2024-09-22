@@ -5,8 +5,8 @@
 	$searchResults = "";
 	$searchCount = 0;
 
-	$firstname = $inData["firstname"];
-  $lastname = $inData["lastname"];
+	$firstname = $inData["firstname"] . "%";
+  	$lastname = $inData["lastname"] . "%";
 	$phone = "%" . $inData["phone"] . "%";
 	$email = "%" . $inData["email"] . "%"; 
 	$userID = $inData["userID"];
