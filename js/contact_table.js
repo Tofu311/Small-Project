@@ -123,7 +123,7 @@ function loadAllContacts() {
 }
 
 function testLength(input) {
-    return input.length >= 50;
+    return input.length <= 50;
 }
 
 function doAddContact() {
@@ -238,7 +238,12 @@ function doUpdateContact(){
     let updatedPhone = document.getElementById('updated-phone').value;
     let updatedEmail = document.getElementById('updated-email').value;
     let contactID = document.getElementById('contactID').value;
-    
+
+    // Define input field criteria. Basically, we just want all to be less than 50 characters
+    if(!(testLength(updatedFirstName) && testLength(updatedLastName) && testLength(updatedPhone) && testLength(updatedEmail))) {
+        document.getElementById("update-contact-result").innerHTML = "Each entry field must be 50 characters or less"
+    }
+
     // If the user has not entered a value for all fields
     if (updatedFirstName === '' || updatedLastName === '' || updatedPhone === '' || updatedEmail === '') {
         // Prompt them to fill all values, and exit
