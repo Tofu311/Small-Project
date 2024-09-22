@@ -41,7 +41,7 @@
             }
             else
             {
-                returnWithError("No contact found with the given information or no changes made.");
+                returnWithError("No changes made. Please make a change or select Cancel");
             }
         }
         else

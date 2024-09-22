@@ -122,6 +122,10 @@ function loadAllContacts() {
     }
 }
 
+function testLength(input) {
+    return input.length <= 50;
+}
+
 function doAddContact() {
     const ADDCONTACT_ENDPOINT = API_URL + "/AddContact.php";
     // Cannot add a contact for a user if we cannot find their userID
@@ -134,6 +138,13 @@ function doAddContact() {
     let newLastName = document.getElementById('new-lastname').value;
     let newPhone = document.getElementById('new-phone').value;
     let newEmail = document.getElementById('new-email').value;
+
+    // Define input field criteria. Basically, we just want all to be less than 50 characters
+    if(!(testLength(newFirstName) && testLength(newLastName) && testLength(newPhone) && testLength(newEmail))) {
+        document.getElementById("add-contact-result").innerHTML = "Each entry field must be 50 characters or less";
+        return;
+    }
+
     // If the user has not entered a value for all fields
     if (newFirstName === '' || newLastName === '' || newPhone === '' || newEmail === '') {
         // Prompt them to fill all values, and exit
@@ -227,7 +238,12 @@ function doUpdateContact(){
     let updatedPhone = document.getElementById('updated-phone').value;
     let updatedEmail = document.getElementById('updated-email').value;
     let contactID = document.getElementById('contactID').value;
-    
+
+    // Define input field criteria. Basically, we just want all to be less than 50 characters
+    if(!(testLength(updatedFirstName) && testLength(updatedLastName) && testLength(updatedPhone) && testLength(updatedEmail))) {
+        document.getElementById("update-contact-result").innerHTML = "Each entry field must be 50 characters or less"
+    }
+
     // If the user has not entered a value for all fields
     if (updatedFirstName === '' || updatedLastName === '' || updatedPhone === '' || updatedEmail === '') {
         // Prompt them to fill all values, and exit
