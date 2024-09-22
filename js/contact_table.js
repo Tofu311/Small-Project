@@ -293,6 +293,19 @@ function doSearchContact() {
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 if (response["error"] === "No Records Found") {
+                    let filterBox = document.getElementById("filter-box");
+                    if (filterBox) {
+                        filterBox.remove();
+                    }
+                    document.getElementById("search-bar-container").innerHTML += `
+                    <div id="filter-box">
+                        <h id="showing-results-for-text">Showing results for</h>
+                        <h id="filter-criteria-text">${search_criteria}</h>
+                        <button id="clear-filter-button" onclick="clearSearchFilter();">
+                            <i class="fa-solid fa-xmark fa-2xl" style="color: white;"></i>
+                        </button>
+                    </div>
+                    `;
                     // Put empty table
                     document.getElementById("contacts-table-body").innerHTML = "";
                     return;
