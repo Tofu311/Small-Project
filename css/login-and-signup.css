@@ -2,22 +2,26 @@
     width: 400px;
     margin: auto;
     margin-top: 50px;
-    background-color: lightgrey;
-    padding: 10px;
-    opacity: .9;
+    padding-left: 12px;
+    padding-right: 12px;
+    background: rgba(49, 38, 62, 0.78);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.8px);
+    -webkit-backdrop-filter: blur(10.8px);
+    border: 1px solid rgba(49, 38, 62, 0.3);
 }
 
 #login-or-signup-header {
     font-size: 36px;
     text-align: center;
     display: block;
-
 }
 
 #login-or-signup-result {
     margin-top: 5px;
     margin-bottom: 0px;
-    color: red;
+    color: #ECA72C;
 }
 
 #switch-login-or-signup {
@@ -32,11 +36,12 @@
     display: inline-block;
     background: none;
     border: none;
-    color: blue;
+    color: #ECA72C;
 }
 
 #switch-login-or-signup-text {
     display: inline-block;
+    color: #EE5622;
 }
 
 #show-password-button {
@@ -44,4 +49,5 @@
     border: none;
     text-decoration: underline;
     cursor: pointer;
+    color: #ECA72C;
 }

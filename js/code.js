@@ -25,7 +25,7 @@ try {
         }
     });
 } catch (err) {
-    console.log(err);
+    
 }
 
 function handleLoginKeyDown(event) {
