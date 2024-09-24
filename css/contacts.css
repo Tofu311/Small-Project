@@ -26,19 +26,16 @@ contact_header {
 }
 
 #contacts-table {
-    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     border-bottom: 1px solid #ddd;
     background-color: #505050;
     opacity: .9;
-}
-
-#contacts-table {
     font-family: Arial;
     width: 100%;
-    border: 1px solid;
-    outline-width: 2px;
     text-align: left;
     table-layout: fixed;
+    border-spacing: 2px 0;
 }
 
 th, td {
@@ -214,4 +211,5 @@ th button {
 .scrollable {
     height: 500px;
     overflow-y: auto;
+    border: 1px solid;
 }
