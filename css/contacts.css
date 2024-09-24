@@ -36,6 +36,7 @@ contact_header {
     text-align: left;
     table-layout: fixed;
     border-spacing: 2px 0;
+    border: 1px solid;
 }
 
 th, td {
@@ -211,5 +212,4 @@ th button {
 .scrollable {
     height: 500px;
     overflow-y: auto;
-    border: 1px solid;
 }
