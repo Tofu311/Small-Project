@@ -191,7 +191,9 @@ th button {
 }
 
 #filter-box {
-    background-color: black;
+    background-color: #000320;
+    box-shadow: 2px 2px 3px #000;
+    border-radius: 4px;
     margin-left: 50px;
     padding: 10px;
 }
@@ -211,5 +213,5 @@ th button {
 
 .scrollable {
     height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
