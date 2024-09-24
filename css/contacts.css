@@ -39,7 +39,8 @@ contact_header {
     border: 1px solid;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
@@ -161,8 +162,9 @@ th button {
     outline: transparant;
     cursor: pointer;
 }
-#hidden-contactID{
-    display:none;
+
+#hidden-contactID {
+    display: none;
 }
 
 #search-bar {
@@ -178,7 +180,7 @@ th button {
     flex-grow: 2;
 }
 
-.search-and-add-container{
+.search-and-add-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
