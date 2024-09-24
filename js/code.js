@@ -28,6 +28,10 @@ try {
     
 }
 
+function testLength(input) {
+    return input.length <= 50;
+}
+
 function handleLoginKeyDown(event) {
     if (event.key === "Enter") {
         doLogin();
@@ -99,6 +103,12 @@ function doSignup() {
     const lowercaseCriteria = /[a-z]/.test(password);
     const numberCriteria = /\d/.test(password);
     const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    // Check that all input fields are less than 50 characters
+    if(!(testLength(firstName) && testLength(lastName) && testLength(username) && testLength(password))) {
+        document.getElementById("login-or-signup-result").innerHTML = "All input fields must be less than 50 characters";
+        return;
+    }
 
     // Check for password validity. Passwords are at least 8 characters in length, at least 1 uppercase, 1 lowercase, 1 number, and 1 special character
     if(!(lengthCriteria && uppercaseCriteria && lowercaseCriteria && numberCriteria && specialCharCriteria)) {
